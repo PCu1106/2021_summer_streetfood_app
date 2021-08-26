@@ -5,27 +5,38 @@
 
 :root {
   --bg-color-1: #44617B;
+  --bg-cam-btn: #EBF6F7;
+  --bg-fav-btn: #BADCAD;
+  --bg-his-btn: #FEF263;
 }
 
-#home-container {
-  display: block;
+.container {
   position: fixed;
+  background-color: var(--bg-color-1);
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
 }
-#home-container #background {
-  width: 100%;
-  height: 100%;
+.container .exit-btn {
+  position: fixed;
+  height: 6rem;
+  width: 6rem;
+  z-index: 3;
+}
+
+#home-container {
+  display: block;
   background-color: var(--bg-color-1);
 }
 #home-container #title {
   position: absolute;
-  top: 20%;
+  top: 25%;
   left: 15%;
-  font-size: 10rem;
+  font-size: 13rem;
   font-color: black;
+  width: 50%;
+  line-height: 10rem;
   color: white;
 }
 #home-container #btn-group .btns {
@@ -34,35 +45,62 @@
   font-color: black;
 }
 #home-container #btn-group #camera-btn {
+  background-color: var(--bg-cam-btn);
   top: 50%;
-  left: 20%;
+  left: 17%;
+  height: 15rem;
+  width: 15rem;
+  padding: 5rem;
+  border-radius: 2rem;
+}
+#home-container #btn-group #camera-btn #camera-icon {
+  height: 100%;
+  width: 100%;
 }
 #home-container #btn-group #favorite-btn {
-  top: 60%;
-  right: 20%;
+  background-color: var(--bg-fav-btn);
+  top: 62%;
+  right: 0%;
+  height: 8rem;
+  width: 8rem;
+  transform: translate(-100%, 0%);
+  padding: 2rem;
+  border-radius: 2rem;
+}
+#home-container #btn-group #favorite-btn #camera-icon {
+  height: 100%;
+  width: 100%;
 }
 #home-container #btn-group #history-btn {
-  top: 40%;
-  right: 20%;
+  background-color: var(--bg-his-btn);
+  top: 50%;
+  right: 0.5rem;
+  height: 8rem;
+  width: 8rem;
+  transform: translate(calc(-100% + 0.5rem), 0%);
+  padding: 2rem 2.5rem 2rem 1.5rem;
+  border-radius: 2rem;
+}
+#home-container #btn-group #history-btn #camera-icon {
+  height: 100%;
+  width: 100%;
 }
 
 #camera-container {
   display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: black;
+}
+#camera-container #camera-exit {
+  top: 2rem;
+  left: 2rem;
 }
 #camera-container #cam-window {
   display: block;
   position: fixed;
   transform: translate(-50%, 0%);
-  top: 3rem;
+  top: 9%;
   left: 50%;
   width: 90%;
-  height: 80%;
+  height: 75%;
   background-color: orange;
 }
 #camera-container #shoot-btn:active {
@@ -79,4 +117,10 @@
   bottom: 3rem;
   left: 50%;
   border: solid #BBB 1rem;
+}
+#favorite-container {
+  display: none;
+}
+#history-container {
+  display: none;
 }

@@ -1,24 +1,24 @@
 doctype html
 html
   head
-    title = title
+    title livefood
     link(href="../../static/sass/dist/homepage.css",rel="stylesheet",type="text/css")
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
     script(src="../../static/js/homepage.js")
 
   body
-    #home-container
-      #background
-      #title live food
+    #home-container.container
+      #title Food cam
       #btn-group
         #camera-btn.btns
-          p 相機
+          img#camera-icon(src='../../static/file/camera.png')
         #favorite-btn.btns
-          p 最愛
+          img#camera-icon(src='../../static/file/favorite.png')
         #history-btn.btns
-          p 歷史紀錄
+          img#camera-icon(src='../../static/file/history.png')
 
-    #camera-container
+    #camera-container.container
+      img#camera-exit.exit-btn(src='../../static/file/previous-icon-w.png')
       #cam-window 
       #shoot-btn
       #restaurant-list.list 
@@ -27,5 +27,9 @@ html
         #element-3.elements
         #element-4.elements
 
-    #record-container
-      #favorite
+    #favorite-container.container
+      img#favorite-exit.exit-btn(src='../../static/file/cross-icon.png')
+
+
+    #history-container.container
+      img#history-exit.exit-btn(src='../../static/file/cross-icon.png')

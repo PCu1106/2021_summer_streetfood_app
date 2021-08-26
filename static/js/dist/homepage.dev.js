@@ -6,7 +6,15 @@ $(document).ready(function () {
     $("#home-container").hide();
     $("#camera-container").show();
   });
-  $("#camera-container").click(function () {
+  $("#favorite-btn").click(function () {
+    $("#home-container").hide();
+    $("#favorite-container").show();
+  });
+  $("#history-btn").click(function () {
+    $("#home-container").hide();
+    $("#history-container").show();
+  });
+  $("#camera-exit").click(function () {
     $("#home-container").show();
     $("#camera-container").hide();
   });

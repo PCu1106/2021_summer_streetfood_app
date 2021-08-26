@@ -1,28 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>= title</title>
+    <title>livefood</title>
     <link href="../../static/sass/dist/homepage.css" rel="stylesheet" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../../static/js/homepage.js"></script>
   </head>
   <body>
-    <div id="home-container">
-      <div id="background"></div>
-      <div id="title">live food</div>
+    <div class="container" id="home-container">
+      <div id="title">Food cam</div>
       <div id="btn-group">
-        <div class="btns" id="camera-btn">
-          <p>相機</p>
-        </div>
-        <div class="btns" id="favorite-btn">
-          <p>最愛</p>
-        </div>
-        <div class="btns" id="history-btn">
-          <p>歷史紀錄</p>
-        </div>
+        <div class="btns" id="camera-btn"><img id="camera-icon" src="../../static/file/camera.png"></div>
+        <div class="btns" id="favorite-btn"><img id="camera-icon" src="../../static/file/favorite.png"></div>
+        <div class="btns" id="history-btn"><img id="camera-icon" src="../../static/file/history.png"></div>
       </div>
     </div>
-    <div id="camera-container">
+    <div class="container" id="camera-container"><img class="exit-btn" id="camera-exit" src="../../static/file/previous-icon-w.png">
       <div id="cam-window"> </div>
       <div id="shoot-btn"></div>
       <div class="list" id="restaurant-list"> 
@@ -32,8 +25,7 @@
         <div class="elements" id="element-4"></div>
       </div>
     </div>
-    <div id="record-container">
-      <div id="favorite"></div>
-    </div>
+    <div class="container" id="favorite-container"><img class="exit-btn" id="favorite-exit" src="../../static/file/cross-icon.png"></div>
+    <div class="container" id="history-container"><img class="exit-btn" id="history-exit" src="../../static/file/cross-icon.png"></div>
   </body>
 </html>
