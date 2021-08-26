@@ -1,0 +1,81 @@
+*
+  margin: 0
+  padding: 0
+
+:root
+  --bg-color-1: #44617B
+
+#home-container
+  display: block
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  #background
+    width: 100%
+    height: 100%
+    background-color: var(--bg-color-1)
+  #title
+    position: absolute
+    top: 20%
+    left: 15%
+    font-size: 10rem
+    font-color: black
+    color: white
+  #btn-group
+    .btns
+      position: absolute
+      font-size: 6rem
+      font-color: black
+    #camera-btn
+      top: 50%
+      left: 20%
+    #favorite-btn
+      top: 60%
+      right: 20%
+    #history-btn
+      top: 40%
+      right: 20%
+
+
+#camera-container
+  display: none
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  background-color: black
+
+  #cam-window 
+    //TODO: 插入相機畫面
+
+    display: block
+    position: fixed
+    transform: translate(-50%, 0%)
+    top: 3rem
+    left: 50%
+    width: 90%
+    height: 80%
+    background-color: orange
+
+  #shoot-btn:active
+    opacity: 0.7
+  #shoot-btn
+    display: block
+    background-color: white
+    position: absolute
+    transform: translate(-50%, 0%)
+    height: 8rem
+    width: 8rem
+    border-radius: 50%
+    bottom: 3rem
+    left: 50%
+    border: solid #BBB 1rem
+
+  #restaurant-list.list 
+    #element-1.elements
+    #element-2.elements
+    #element-3.elements
+    #element-4.elements
