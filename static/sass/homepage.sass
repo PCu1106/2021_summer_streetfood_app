@@ -8,6 +8,7 @@
   --bg-fav-btn: #BADCAD
   --bg-his-btn: #FEF263
 
+  --main-btnsize: 15rem
 
 .container
   position: fixed
@@ -22,6 +23,9 @@
     height: 6rem
     width: 6rem
     z-index: 3
+  
+  .exit-btn:active
+    transform: scale(0.97)
 
 #home-container
   display: block
@@ -37,16 +41,25 @@
     line-height: 10rem
     color: white
   #btn-group
+    position: fixed
+    transform: translate(-50%, -50%)
+    top: 63%
+    left: 50%
+    width: calc(var(--main-btnsize) * 1.5 + 14rem + 2rem)
+    height: calc(var(--main-btnsize) + 10rem)
+
+    .btns:active
+      transform: scale(0.98)
+
     .btns
       position: absolute
       font-size: 6rem
-      font-color: black
     #camera-btn
       background-color: var(--bg-cam-btn)
-      top: 50%
-      left: 17%
-      height: 15rem
-      width: 15rem
+      top: 0
+      left: 0
+      height: var(--main-btnsize)
+      width: var(--main-btnsize)
       padding: 5rem
       border-radius: 2rem
       #camera-icon
@@ -55,11 +68,11 @@
 
     #favorite-btn
       background-color: var(--bg-fav-btn)
-      top: 62%
+      top: 0%
       right: 0%
-      height: 8rem
-      width: 8rem
-      transform: translate(-100%, 0%)
+      height: calc(var(--main-btnsize) / 2)
+      width: calc(var(--main-btnsize) / 2)
+      //transform: translate(-100%, 0%)
       padding: 2rem
       border-radius: 2rem
       #camera-icon
@@ -68,11 +81,10 @@
 
     #history-btn
       background-color: var(--bg-his-btn)
-      top: 50%
-      right: 0.5rem
-      height: 8rem
-      width: 8rem
-      transform: translate(calc(-100% + 0.5rem), 0%)
+      bottom: 0%
+      right: 0%
+      height: calc(var(--main-btnsize) / 2)
+      width: calc(var(--main-btnsize) / 2)
       padding: 2rem 2.5rem 2rem 1.5rem
       border-radius: 2rem
       #camera-icon
@@ -100,7 +112,7 @@
     background-color: orange
 
   #shoot-btn:active
-    opacity: 0.7
+    opacity: 0.8
   #shoot-btn
     display: block
     background-color: white
@@ -124,9 +136,13 @@
   display: none
 
   #favorite-exit
+    top: 1rem
+    left: 1rem
 
 
 #history-container
   display: none
 
   #history-exit
+    top: 2rem
+    left: 2rem

@@ -8,6 +8,7 @@
   --bg-cam-btn: #EBF6F7;
   --bg-fav-btn: #BADCAD;
   --bg-his-btn: #FEF263;
+  --main-btnsize: 15rem;
 }
 
 .container {
@@ -24,6 +25,9 @@
   width: 6rem;
   z-index: 3;
 }
+.container .exit-btn:active {
+  transform: scale(0.97);
+}
 
 #home-container {
   display: block;
@@ -39,17 +43,27 @@
   line-height: 10rem;
   color: white;
 }
+#home-container #btn-group {
+  position: fixed;
+  transform: translate(-50%, -50%);
+  top: 63%;
+  left: 50%;
+  width: calc(var(--main-btnsize) * 1.5 + 14rem + 2rem);
+  height: calc(var(--main-btnsize) + 10rem);
+}
+#home-container #btn-group .btns:active {
+  transform: scale(0.98);
+}
 #home-container #btn-group .btns {
   position: absolute;
   font-size: 6rem;
-  font-color: black;
 }
 #home-container #btn-group #camera-btn {
   background-color: var(--bg-cam-btn);
-  top: 50%;
-  left: 18%;
-  height: 15rem;
-  width: 15rem;
+  top: 0;
+  left: 0;
+  height: var(--main-btnsize);
+  width: var(--main-btnsize);
   padding: 5rem;
   border-radius: 2rem;
 }
@@ -59,11 +73,10 @@
 }
 #home-container #btn-group #favorite-btn {
   background-color: var(--bg-fav-btn);
-  top: 63%;
+  top: 0%;
   right: 0%;
-  height: 8rem;
-  width: 8rem;
-  transform: translate(-100%, 0%);
+  height: calc(var(--main-btnsize) / 2);
+  width: calc(var(--main-btnsize) / 2);
   padding: 2rem;
   border-radius: 2rem;
 }
@@ -73,11 +86,10 @@
 }
 #home-container #btn-group #history-btn {
   background-color: var(--bg-his-btn);
-  top: 50%;
-  right: 0.5rem;
-  height: 8rem;
-  width: 8rem;
-  transform: translate(calc(-100% + 0.5rem), 0%);
+  bottom: 0%;
+  right: 0%;
+  height: calc(var(--main-btnsize) / 2);
+  width: calc(var(--main-btnsize) / 2);
   padding: 2rem 2.5rem 2rem 1.5rem;
   border-radius: 2rem;
 }
@@ -104,7 +116,7 @@
   background-color: orange;
 }
 #camera-container #shoot-btn:active {
-  opacity: 0.7;
+  opacity: 0.8;
 }
 #camera-container #shoot-btn {
   display: block;
@@ -121,6 +133,15 @@
 #favorite-container {
   display: none;
 }
+#favorite-container #favorite-exit {
+  top: 1rem;
+  left: 1rem;
+}
+
 #history-container {
   display: none;
+}
+#history-container #history-exit {
+  top: 2rem;
+  left: 2rem;
 }
