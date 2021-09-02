@@ -22,14 +22,6 @@ $(document).ready(function () {
     });
   }
 
-  function cameraStop(stream) {
-    stream.getTracks().forEach(function (track) {
-      if (track.readyState == 'live' && track.kind === 'video') {
-        track.stop();
-      }
-    });
-  }
-
   $("#camera-btn").click(function () {
     $("#home-container").hide();
     $("#camera-container").show();
@@ -49,6 +41,12 @@ $(document).ready(function () {
     $("#camera-container").hide();
     $("#favorite-container").hide();
     $("#history-container").hide();
+  });
+  $("#camera-exit").click(function () {
+    console.log('camera stop');
+    cameraWindow.srcObject.getTracks().forEach(function (track) {
+      track.stop();
+    });
   });
   var intervalId = window.setInterval(function () {
     // check every 10 seconds
