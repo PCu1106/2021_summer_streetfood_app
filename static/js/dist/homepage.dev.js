@@ -21,4 +21,15 @@ $(document).ready(function () {
     $("#favorite-container").hide();
     $("#history-container").hide();
   });
+  var intervalId = window.setInterval(function () {
+    // check every 10 seconds
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        console.log(position);
+        console.log('geolocation is supported');
+      });
+    } else {
+      console.log('geolocation is not supported');
+    }
+  }, 10000);
 });

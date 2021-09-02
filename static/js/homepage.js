@@ -22,4 +22,15 @@ $(document).ready(function(){
     $("#history-container").hide();
   });
 
+  let intervalId = window.setInterval(function(){ // check every 10 seconds
+    if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position){
+        console.log(position);
+        console.log('geolocation is supported');
+      });}
+    else{
+      console.log('geolocation is not supported');
+    }
+  }, 10000);
+
 })
