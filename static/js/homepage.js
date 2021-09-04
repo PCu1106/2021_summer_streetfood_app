@@ -51,16 +51,59 @@ $(document).ready(function(){
     });
   });
   
-  
-  let intervalId = window.setInterval(function(){ // check every 10 seconds
-    if(navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position){
-        console.log(position);
-        console.log('geolocation is supported');
-      });}
-    else{
-      console.log('geolocation is not supported');
-    }
-  }, 10000);
-  
+  //check gps signal each 10 sec and show with icon
+  let intervalId = window.setInterval(function(){
+
+    // var wpid = navigator.geolocation.watchPosition(geo_success, geo_error, geo_options);
+    // console.log(wpid);
+    navigator.geolocation.getCurrentPosition(geo_success, geo_error, geo_options);
+    // if(navigator.geolocation) {
+    //   console.log('geolocation is supported');
+    //   navigator.geolocation.watchPosition(function(position){
+    //     if(position.coords.latitude){
+    //       console.log('empty');
+    //     }
+    //     if(position){
+    //     }
+    //     else{
+    //       console.log('n');
+    //       $('#gps-signal').attr('src', '../../static/file/gps-n.png')
+    //       console.log(position);
+    //     }
+    //   }), 
+    //   function(error) {
+    //     if (error.code == error.PERMISSION_DENIED)
+    //       console.log("you denied me :-(");
+    //   };
+    // }
+    // else{
+
+    //   console.log('geolocation is not supported');
+    // }
+  }, 1000);
 })
+
+var geo_options = {
+  enableHighAccuracy: true,
+  maximumAge        : 10000,
+  timeout           : 3000
+};
+
+var last_timestamp = 0;
+function geo_success(position) {
+  if(position.timestamp !== last_timestamp){
+    console.log('y');
+    $('#gps-signal').attr('src', '../../static/file/gps-y.png')
+    last_timestamp = position.timestamp;
+    console.log(position);
+  }
+  else{
+    console.log('no new')
+  }
+};
+
+function geo_error(error) {
+  console.log(error.message);
+  $('#gps-signal').attr('src', '../../static/file/gps-n.png')
+  // console.log(position);
+};

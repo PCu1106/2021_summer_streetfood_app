@@ -29,6 +29,22 @@
   transform: scale(0.97);
 }
 
+#status-container {
+  position: fixed;
+  height: 10%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+#status-container #gps-signal {
+  position: absolute;
+  right: 1rem;
+  top: 1.5rem;
+  height: 5rem;
+  width: 5rem;
+}
+
 #home-container {
   display: block;
   background-color: var(--bg-color-1);
