@@ -107,3 +107,15 @@ function geo_error(error) {
   $('#gps-signal').attr('src', '../../static/file/gps-n.png')
   // console.log(position);
 };
+
+if(window.DeviceOrientationEvent) {
+  window.addEventListener('deviceorientation', 
+    function(event) {
+      var a = document.getElementById('alpha');
+      alpha = event.alpha;
+      a.innerHTML = Math.round(alpha);
+    }, 
+  false);
+}else{
+  document.querySelector('body').innerHTML = '你的瀏覽器不支援喔';
+}
