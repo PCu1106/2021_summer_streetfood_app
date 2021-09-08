@@ -20,9 +20,11 @@
 
   .exit-btn
     position: fixed
-    height: 6rem
-    width: 6rem
+    height: 5rem
+    width: 5rem
     z-index: 3
+    top: 1rem
+    left: 1rem
   
   .exit-btn:active
     transform: scale(0.97)
@@ -30,9 +32,9 @@
 #status-container
   position: fixed
   height: 10%
-  width: 100%
+  width: 10%
   top: 0
-  left: 0
+  right: 0
   z-index: 1
   #gps-signal
     position: absolute
@@ -48,7 +50,7 @@
   #title
     position: absolute
     top: 25%
-    left: 15%
+    left: 18%
     font-size: 13rem
     font-color: black
     width: 50%
@@ -157,14 +159,71 @@
 #favorite-container
   display: none
 
-  #favorite-exit
-    top: 1rem
-    left: 1rem
-
-
 #history-container
   display: none
 
-  #history-exit
-    top: 2rem
-    left: 2rem
+
+.title
+  font-size: 6rem
+  color: white
+  margin-top: 2rem
+.list
+  position: fixed
+  transform: translate(-50%, 0)
+  left: 50%
+  width: 80%
+  height: 90%
+  overflow: scroll
+
+  .shop-item
+    position: relative
+    border-radius: 3rem
+    background-color: #DAE1F2
+    margin-bottom: 2.5rem
+
+    .shop-name
+      font-size: 3rem
+      font-weight: 900
+
+    .score
+      font-size: 3rem
+      margin-left: 30px
+      float: left
+      line-height: 4.5rem
+
+    .ratings
+      position: relative
+      display: inline-block
+      color: #ddd
+    
+      overflow: hidden
+      font-size: 3rem
+    
+      text-shadow: 0px 1px 0 #999
+
+      .full_star
+        width: 75%
+
+        position: absolute
+        left: 0
+        top: 0
+        white-space: nowrap
+        overflow: hidden
+        color: #D56A16
+
+    .command
+      font-size: 2rem
+      margin-left: 2rem
+    .phone-number, .business-hours
+      font-size: 2rem
+      margin-left: 2rem
+
+    .small-block
+      line-height: 5.5rem
+      background-color: #94aeeb
+      font-size: 2rem
+      border-radius: 1rem
+      text-align: center
+      margin: 4rem
+      display: inline
+      padding: 0.5rem
