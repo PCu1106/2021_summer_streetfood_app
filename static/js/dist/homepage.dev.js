@@ -127,7 +127,7 @@ var last_timestamp = 0;
 
 function geo_success(position) {
   if (position.timestamp !== last_timestamp) {
-    console.log('y');
+    // console.log('y');
     $('#gps-signal').attr('src', '../../static/file/gps-y.png');
     last_timestamp = position.timestamp;
     console.log(position);

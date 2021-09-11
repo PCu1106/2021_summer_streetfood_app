@@ -30,7 +30,6 @@
 .container .exit-btn:active {
   transform: scale(0.97);
 }
-
 #status-container {
   position: fixed;
   height: 10%;
