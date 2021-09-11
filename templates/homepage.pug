@@ -33,7 +33,12 @@ html
         h1 方位
           span#alpha
       //- for debug
+      video#cam-window(autoplay)
+      canvas#cam-sensor
+      img#cam-output(src="//:0")(alt="")
       #shoot-btn
+      #shoot-again-btn Again
+      #goto-list-btn List
       #restaurant-list.list 
         #element-1.elements
         #element-2.elements

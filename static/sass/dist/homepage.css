@@ -134,6 +134,16 @@
   object-fit: cover;
 }
 #camera-container #cam-sensor {
+  display: none;
+  position: fixed;
+  transform: translate(-50%, 0%);
+  top: 9%;
+  left: 50%;
+  width: 90%;
+  height: 75%;
+  object-fit: cover;
+}
+#camera-container #cam-output {
   display: block;
   position: fixed;
   transform: translate(-50%, 0%);
@@ -157,6 +167,40 @@
   bottom: 3rem;
   left: 50%;
   border: solid #BBB 1rem;
+}
+#camera-container #shoot-btn .taken {
+  height: 100px !important;
+  width: 100px !important;
+  transition: all 0.5s ease-in;
+  top: 20px;
+  right: 20px;
+  z-index: 2;
+}
+#camera-container #shoot-again-btn {
+  display: block;
+  background-color: white;
+  position: absolute;
+  transform: translate(-50%, 0%);
+  height: 8rem;
+  width: 8rem;
+  border-radius: 20%;
+  bottom: 3rem;
+  left: 25%;
+  border: solid #BBB 1rem;
+  font-size: 50px;
+}
+#camera-container #goto-list-btn {
+  display: block;
+  background-color: white;
+  position: absolute;
+  transform: translate(-50%, 0%);
+  height: 8rem;
+  width: 8rem;
+  border-radius: 20%;
+  bottom: 3rem;
+  left: 75%;
+  border: solid #BBB 1rem;
+  font-size: 50px;
 }
 #favorite-container {
   display: none;
