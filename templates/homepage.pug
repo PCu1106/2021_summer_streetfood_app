@@ -22,9 +22,12 @@ html
 
     #camera-container.container
       img#camera-exit.exit-btn(src='../../static/file/previous-icon-w.png')
-      video#cam-window(autoplay playsinline)
-      canvas#cam-sensor 
+      video#cam-window(autoplay)
+      canvas#cam-sensor
+      img#cam-output(src="//:0")(alt="")
       #shoot-btn
+      #shoot-again-btn Again
+      #goto-list-btn List
       #restaurant-list.list 
         #element-1.elements
         #element-2.elements

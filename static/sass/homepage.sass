@@ -110,6 +110,16 @@
     object-fit: cover
 
   #cam-sensor
+    display: none
+    position: fixed
+    transform: translate(-50%, 0%)
+    top: 9%
+    left: 50%
+    width: 90%
+    height: 75%
+    object-fit: cover
+  
+  #cam-output
     display: block
     position: fixed
     transform: translate(-50%, 0%)
@@ -118,7 +128,7 @@
     width: 90%
     height: 75%
     object-fit: cover
-
+  
   #shoot-btn:active
     opacity: 0.8
   #shoot-btn
@@ -132,6 +142,45 @@
     bottom: 3rem
     left: 50%
     border: solid #BBB 1rem
+    .taken
+      height: 100px!important
+      width: 100px!important
+      transition: all 0.5s ease-in
+      top: 20px
+      right: 20px
+      z-index: 2
+  
+  #shoot-again-btn:active
+
+  #shoot-again-btn
+    display: block
+    background-color: white
+    position: absolute
+    transform: translate(-50%, 0%)
+    height: 8rem
+    width: 8rem
+    border-radius: 20%
+    bottom: 3rem
+    left: 25%
+    border: solid #BBB 1rem
+    font-size: 50px
+    text-align:center
+  
+  #goto-list-btn:active
+
+  #goto-list-btn
+    display: block
+    background-color: white
+    position: absolute
+    transform: translate(-50%, 0%)
+    height: 8rem
+    width: 8rem
+    border-radius: 20%
+    bottom: 3rem
+    left: 75%
+    border: solid #BBB 1rem
+    font-size: 50px
+    text-align:center
 
   #restaurant-list.list 
     #element-1.elements
