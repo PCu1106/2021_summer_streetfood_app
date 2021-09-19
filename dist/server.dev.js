@@ -13,8 +13,11 @@ var certPath = '../ssl/certificate.pem';
 var hskey = fs.readFileSync(keyPath);
 var hscert = fs.readFileSync(certPath);
 var app = express();
-var port = 8787; //var credentials = { key:hskey, cert:hscert};
-
+var port = 8787;
+var credentials = {
+  key: hskey,
+  cert: hscert
+};
 app.use('./static', express["static"](__dirname + './static'));
 /*
 app.get('/', function (req, res) {

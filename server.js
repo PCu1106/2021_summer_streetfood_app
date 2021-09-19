@@ -9,7 +9,7 @@ var hscert = fs.readFileSync(certPath);
 var app = express();
 var port = 8787;
 
-//var credentials = { key:hskey, cert:hscert};
+var credentials = { key:hskey, cert:hscert};
 
 app.use('./static', express.static(__dirname + './static'));
 /*
