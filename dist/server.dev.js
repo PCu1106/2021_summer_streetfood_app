@@ -27,15 +27,10 @@ app.listen(port, "127.0.0.1", function () {
 });
 /*
 var credentials = { key:hskey, cert:hscert};
-
-app.use('./static', express.static(__dirname + './static'));
-
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/templates/dist/homepage.html')); 
 });
-
 var server = https.createServer(credentials,app);
-
 server.listen(port, "foodcam.tk", function() {
   console.log('Server is running on ' + port + ' port...');
 });
