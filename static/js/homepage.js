@@ -1,12 +1,13 @@
 $(document).ready(function(){
   console.log('loaded')
 
+  //-----------------camera function---------------
   const constraints = { video: { facingMode: "environment"}, audio: false};
 
   const cameraWindow = document.querySelector("#cam-window"),
         cameraSensor = document.querySelector("#cam-sensor"),
         cameraOutput = document.querySelector("#cam-output")
-  
+
   function cameraStart() {
     console.log('camera start')
     navigator.mediaDevices
@@ -45,12 +46,17 @@ $(document).ready(function(){
     cameraOutput.classList.add("taken");
   }
 
+  //-----------------page switch---------------
   $("#camera-btn").click(function(){
-    $("#home-container").hide();
-    $("#camera-container").show();
-    $("#shoot-btn").show();
-    $("#shoot-again-btn").hide();
-    $("#goto-list-btn").hide();
+    //delay for camera ready
+    setTimeout(function(){
+      $("#home-container").hide();
+      $("#camera-container").show();
+      $("#shoot-btn").show();
+      $("#shoot-again-btn").hide();
+      $("#goto-list-btn").hide();
+      console.log('hide')
+    }, 1000); 
     cameraOutput.style.display = "none";
     cameraStart();
   });
@@ -65,6 +71,17 @@ $(document).ready(function(){
     $("#history-container").show();
   });
 
+  $("#history-sw").click(function(){
+    $("#home-container").hide();
+    $("#favorite-container").hide();
+    $("#history-container").show();
+  });
+
+  $("#favorite-sw").click(function(){
+    $("#home-container").hide();
+    $("#favorite-container").show();
+    $("#history-container").hide();
+  });
   
   $(".exit-btn").click(function(){
     console.log('exit')
@@ -78,6 +95,7 @@ $(document).ready(function(){
     cameraStop();
   });
 
+  //-----------------cam action---------------
   $("#shoot-btn").click(function(){
     cameraSnapshot();
     cameraStop();
@@ -96,40 +114,18 @@ $(document).ready(function(){
   });
   
   //check gps signal each 10 sec and show with icon
+  nonew = 0
   let intervalId = window.setInterval(function(){
-
-    // var wpid = navigator.geolocation.watchPosition(geo_success, geo_error, geo_options);
-    // console.log(wpid);
     navigator.geolocation.getCurrentPosition(geo_success, geo_error, geo_options);
-    // if(navigator.geolocation) {
-    //   console.log('geolocation is supported');
-    //   navigator.geolocation.watchPosition(function(position){
-    //     if(position.coords.latitude){
-    //       console.log('empty');
-    //     }
-    //     if(position){
-    //     }
-    //     else{
-    //       console.log('n');
-    //       $('#gps-signal').attr('src', '../../static/file/gps-n.png')
-    //       console.log(position);
-    //     }
-    //   }), 
-    //   function(error) {
-    //     if (error.code == error.PERMISSION_DENIED)
-    //       console.log("you denied me :-(");
-    //   };
-    // }
-    // else{
-
-    //   console.log('geolocation is not supported');
-    // }
   }, 1000);
 })
 
+
+
+//-----------------geo function---------------
 var geo_options = {
   enableHighAccuracy: true,
-  maximumAge        : 10000,
+  maximumAge        : 5000,
   timeout           : 3000
 };
 
@@ -140,9 +136,15 @@ function geo_success(position) {
     $('#gps-signal').attr('src', '../../static/file/gps-y.png')
     last_timestamp = position.timestamp;
     console.log(position);
+    nonew = 0
   }
   else{
-    console.log('no new')
+    console.log('no new geo info')
+    nonew += 1
+    if (nonew > 10){
+
+    $('#gps-signal').attr('src', '../../static/file/gps-weak.png')
+    }
   }
 };
 
