@@ -140,9 +140,9 @@ function geo_success(position) {
   }
   else{
     console.log('no new geo info')
+    // console.log(nonew)
     nonew += 1
-    if (nonew > 10){
-
+    if (nonew > 5){
     $('#gps-signal').attr('src', '../../static/file/gps-weak.png')
     }
   }
