@@ -8,7 +8,12 @@ var path = require('path');
 
 var express = require('express');
 
+<<<<<<< HEAD
 var file = "test.db"; //-----run these code when you are on server---------
+=======
+var _require = require('python-shell'),
+    PythonShell = _require.PythonShell; //-----run these code when you are on server---------
+>>>>>>> 98c1b3f (try python shell)
 // var keyPath = '../ssl/private.key';
 // var certPath = '../ssl/certificate.pem';
 // var hskey = fs.readFileSync(keyPath);
@@ -17,7 +22,21 @@ var file = "test.db"; //-----run these code when you are on server---------
 
 var app = express();
 var port = 8787;
-app.use('/static', express["static"](__dirname + '/static')); //---------------run these code when you are local------------------------------
+app.use('/static', express["static"](__dirname + '/static')); //-----python shell
+
+app.get('/python', function (req, res) {
+  console.log('get python'); //set req structure
+
+  var options = {
+    args: [req.query.name, req.query.from, req.query.end]
+  };
+  PythonShell.run('./pythonfunc/info.py', options, function (err, data) {
+    if (err) res.send(err);
+    var parsedString = JSON.parse(data);
+    console.log("name: ".concat(parsedString.Name, ", from: ").concat(parsedString.From, ", end: ").concat(parsedString.end));
+    res.json(parsedString);
+  });
+}); //---------------run these code when you are local------------------------------
 
 app.get('/', function (req, res) {
   console.log("".concat(__dirname + '/static')); //res.sendFile(path.join(__dirname + '/templates/dist/index.html'));

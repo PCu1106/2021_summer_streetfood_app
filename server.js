@@ -2,7 +2,9 @@ var fs = require('fs');
 var https = require('https');
 var path = require('path');
 var express = require('express');
+
 var file = "test.db";
+let {PythonShell} = require('python-shell')
 
 //-----run these code when you are on server---------
 // var keyPath = '../ssl/private.key';
@@ -15,6 +17,27 @@ var app = express();
 var port = 8787;
 
 app.use('/static', express.static(__dirname + '/static'));
+
+//-----python shell
+app.get('/python', function(req, res){
+  console.log('get python')
+  //set req structure
+  let options = {
+    args:
+      [
+        req.query.name,
+        req.query.from,
+        req.query.end
+      ]
+  }
+
+  PythonShell.run('./pythonfunc/info.py', options, (err, data) => {
+    if (err) res.send(err)
+    const parsedString = JSON.parse(data)
+    console.log(`name: ${parsedString.Name}, from: ${parsedString.From}, end: ${parsedString.end}`)
+    res.json(parsedString) 
+  })
+})
 
 //---------------run these code when you are local------------------------------
 app.get('/', function (req, res) {
