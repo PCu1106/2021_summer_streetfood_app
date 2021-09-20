@@ -8,8 +8,8 @@
     "install": "^0.13.0",
     "jquery": "^3.6.0",
     "nodemon": "^2.0.12",
-    "sqlite3": "^5.0.2",
-    "python-shell": "^3.0.0"
+    "python-shell": "^3.0.0",
+    "sqlite3": "^4.2.0"
   },
   "devDependencies": {},
   "scripts": {
