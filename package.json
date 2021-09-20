@@ -7,7 +7,8 @@
     "express": "^4.17.1",
     "install": "^0.13.0",
     "jquery": "^3.6.0",
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.12",
+    "sqlite3": "^5.0.2"
   },
   "devDependencies": {},
   "scripts": {
