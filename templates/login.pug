@@ -10,8 +10,8 @@ head
 body
     .container
         .title Food cam
-        h1 登入
         form#login 
+            h1 登入
             label(for="username") 帳號 
             input(type="text" name="username")
             br
@@ -21,4 +21,17 @@ body
             #signin-output
             button(class="reg" type='submit') 註冊
             button(class="log" type='submit') 登入
+        form#register
+            h1 註冊
+            label(for="re_username") 帳號 
+            input(type="text" name="re_username")
+            br
+            label(for="re_password") 密碼
+            input(type="password" name="re_password") 
+            br
+            label(for="re_passwordagain") 確認密碼
+            input(type="password" name="re_passwordagain") 
+            br
+            #register-output
+            button(class="create" type='submit') 確定
     script(src='../../static/js/login.js')

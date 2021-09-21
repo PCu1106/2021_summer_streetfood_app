@@ -128,6 +128,30 @@ app.post('/templates/dist/login', (req, res) => {
   }
 });
 
+//register
+app.post('/templates/dist/register', (req, res) => {
+  if (req.body.account != "" && req.body.password != "") {
+    db_user.get("SELECT account FROM users WHERE account = ?", [req.body.account], function(err, row) {
+      if (row == undefined) {
+        if (req.body.passwordagain==req.body.password){
+          db_user.serialize(function() {
+            db_user.run("CREATE TABLE IF NOT EXISTS users (account INTEGER, password INTEGER)");
+            db_user.run("INSERT INTO users (account, password) VALUES (?, ?)", [req.body.account, req.body.password]);
+            });
+            res.send("註冊成功！將為您跳轉到登入畫面");
+        }else{
+          res.send("密碼不符，請再次確認！");
+        }
+        
+      } else {
+          res.send("帳號已存在！");
+        }
+      })
+  } else {
+      res.send("帳號或密碼不能空白！");
+  }
+});
+
 //------------------------------------------------------------------------------
 
 
