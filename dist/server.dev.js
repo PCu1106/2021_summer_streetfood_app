@@ -38,24 +38,29 @@ app.get('/python', function (req, res) {
 }); //---------------run these code when you are local------------------------------
 
 app.get('/', function (req, res) {
-  console.log("".concat(__dirname + '/static')); // res.sendFile(path.join(__dirname + '/templates/dist/login.html'));
+  console.log("".concat(__dirname + '/static')); //res.sendFile(path.join(__dirname + '/templates/dist/index.html'));
 
-  var sqlite3 = require("sqlite3").verbose();
-
-  var db = new sqlite3.Database(file);
-  var sqlselect = "SELECT a.NAME FROM table3 as a INNER JOIN hitstory_01 as b ON a.ID = b.shopID;";
-  var x = 1;
-  var param = {};
-  db.each(sqlselect, function (err, row) {
-    //console.log(row.ID + ": " + row.NAME);
-    //add(2);
-    sqlgetdata(row.NAME, x, param);
-    x++;
-  });
-  render(path.join(__dirname + '/templates/dist/homepage.html'), param, function (err, data) {
+  render(path.join(__dirname + '/templates/dist/homepage.html'), function (err, data) {
     res.send(data);
   });
 });
+
+function sql() {
+  var sqlite3 = require("sqlite3").verbose();
+
+  var db = new sqlite3.Database(file);
+  var sqlselect = "SELECT * FROM table3 as a INNER JOIN hitstory_01 as b ON a.ID = b.shopID;";
+  var x = 1;
+  var param = {};
+  db.each(sqlselect, function (err, row) {
+    console.log(row.ID + ": " + row.NAME);
+    sqlgetdata(row.NAME, x, param);
+    x++;
+  });
+  db.close();
+  console.log(param);
+  return param;
+}
 
 function sqlgetdata(name, x, param) {
   var key = 'shopname' + x;
@@ -63,24 +68,58 @@ function sqlgetdata(name, x, param) {
   param[key] = data;
 }
 
-function render(filename, params, callback) {
-  fs.readFile(filename, 'utf8', function (err, data) {
-    console.log('render');
-    if (err) return callback(err);
-    var x = 1;
-
-    for (var key in params) {
-      console.log('params[' + key + ']' + params[key]);
-      block = '<div class="shop-item"><p class="shop-name" align="center">' + params[key] + '</p><p class="score">{score' + x + '}</p><p class="score">4.4</p><div class="ratings"><div class="empty_star">★★★★★</div><div class="full_star">★★★★★</div></div><p class="command">1825則評論</p><p class="phone-number">電話:06-2365768</p><p class="business-hours">營業時間:11:00-21:00</p><div class="small-block">電話</div><div class="small-block">網站</div><div class="small-block">儲存</div></div>';
-      data = data.replace('<!-- {' + key + '} -->', block);
-      console.log(data);
-      x++;
-    }
-
-    callback(null, data);
+function wait(ms) {
+  return new Promise(function (resolve) {
+    return setTimeout(function () {
+      return resolve();
+    }, ms);
   });
 }
 
+;
+
+function render(filename, callback) {
+  fs.readFile(filename, 'utf8', function _callee(err, data) {
+    var params, x, key;
+    return regeneratorRuntime.async(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            if (!err) {
+              _context.next = 2;
+              break;
+            }
+
+            return _context.abrupt("return", callback(err));
+
+          case 2:
+            params = {};
+            params = sql();
+            x = 1;
+            console.log(params);
+            _context.next = 8;
+            return regeneratorRuntime.awrap(wait(200));
+
+          case 8:
+            for (key in params) {
+              console.log('params[' + key + ']' + params[key]);
+              block = '<div class="shop-item"><p class="shop-name" align="center">' + params[key] + '</p><p class="score">{score' + x + '}</p><p class="score">4.4</p><div class="ratings"><div class="empty_star">★★★★★</div><div class="full_star">★★★★★</div></div><p class="command">1825則評論</p><p class="phone-number">電話:06-2365768</p><p class="business-hours">營業時間:11:00-21:00</p><div class="small-block">電話</div><div class="small-block">網站</div><div class="small-block">儲存</div></div>';
+              data = data.replace('<!-- {' + key + '} -->', block);
+              x++;
+            }
+
+            callback(null, data);
+
+          case 10:
+          case "end":
+            return _context.stop();
+        }
+      }
+    });
+  });
+}
+
+;
 app.listen(port, "127.0.0.1", function () {
   console.log('Server is running on http://127.0.0.1:' + port);
 }); //login
