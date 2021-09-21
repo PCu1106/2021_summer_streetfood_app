@@ -42,7 +42,8 @@ app.get('/python', function(req, res){
 //---------------run these code when you are local------------------------------
 app.get('/', function (req, res) {
   console.log(`${__dirname+'/static'}`);
-  //res.sendFile(path.join(__dirname + '/templates/dist/index.html'));
+  
+  // res.sendFile(path.join(__dirname + '/templates/dist/login.html'));
   var sqlite3 = require("sqlite3").verbose();
   var db = new sqlite3.Database(file);
   var sqlselect = "SELECT a.NAME FROM table3 as a INNER JOIN hitstory_01 as b ON a.ID = b.shopID;";
@@ -83,6 +84,39 @@ function render(filename, params, callback) {
 app.listen(port, "127.0.0.1", () => {
   console.log('Server is running on http://127.0.0.1:' + port);
 });
+
+//login
+var sqlite3 = require('sqlite3').verbose()
+var db_user = new sqlite3.Database("users.db");
+const bodyParser = require('body-parser')
+
+app.use(bodyParser.json({ limit: "1mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "1mb", extended: true }));
+
+app.use(express.static(`${__dirname}`));
+
+app.get('/login', (req, res) => {
+  res.redirect('./templates/dist/login.html');
+});
+
+app.post('/templates/dist/login', (req, res) => {
+  if (req.body.account != "" && req.body.password != "") {
+    db_user.get("SELECT password FROM users WHERE account = ?", [req.body.account], function(err, row) {
+        if (row == undefined) {
+            res.send("帳號不存在！");
+        } else if (row.password == req.body.password) {
+          db_user.get("SELECT id FROM users WHERE account = ?", [req.body.account], function(err, row) {
+                res.send("jump");
+            })
+        } else {
+            res.send("密碼錯誤！");
+        }
+    })
+  } else {
+      res.send("帳號或密碼不能空白！");
+  }
+});
+
 //------------------------------------------------------------------------------
 
 
