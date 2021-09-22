@@ -42,7 +42,7 @@ $(document).ready(function(){
     cameraSensor.width = cameraWindow.videoWidth;
     cameraSensor.height = cameraWindow.videoHeight;
     cameraSensor.getContext("2d").drawImage(cameraWindow, 0, 0,cameraSensor.width,cameraSensor.height);
-    cameraOutput.src = cameraSensor.toDataURL("image/webp");
+    cameraOutput.src = cameraSensor.toDataURL("image/png");
     cameraOutput.classList.add("taken");
   }
 
@@ -112,7 +112,26 @@ $(document).ready(function(){
     cameraOutput.style.display = "none";
     cameraStart();
   });
-  
+  // list 
+  $("#goto-list-btn").click(function(){
+    //$("#restaurant-list").show();
+    //$("#camera-container").hide();
+    //$("#goto-list-btn").hide();
+    var img = { img_64 : document.getElementById("cam-output").getAttribute("src")};
+    // send base64 to server
+    $.ajax({
+      data : img,
+      url : '/list',
+      type : 'post',
+      dataType : 'json',
+      success : function(data){
+        console.log(data);
+      },
+      error : function(jqXHR, textStatus, errorThrown){
+        alert(jqXHR.textStatus);
+      }
+    });
+  });
   //check gps signal each 10 sec and show with icon
   nonew = 0
   let intervalId = window.setInterval(function(){

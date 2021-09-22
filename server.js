@@ -117,6 +117,27 @@ app.post('/templates/dist/login', (req, res) => {
   }
 });
 
+// list
+app.post('/list', (req, res) =>{
+  let pyshell = new PythonShell('./pythonfunc/dectect_picture.py');
+  // send base64 string to python stdin
+  pyshell.send(req.body.img_64)
+
+  // received a message from Python script (ex:print (xxx) )
+  pyshell.on('message', function (message) {
+    console.log(message);
+    res.send(message);
+  });
+  
+  // end the input stream and allow the process to exit
+  pyshell.end(function (err,code,signal) {
+    if (err) throw err;
+    console.log('The exit code was: ' + code);
+    console.log('The exit signal was: ' + signal);
+    console.log('finished');
+  });
+});
+
 //------------------------------------------------------------------------------
 
 

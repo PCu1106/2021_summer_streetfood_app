@@ -1,6 +1,8 @@
 * {
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  outline: none;
 }
 
 :root {
@@ -118,6 +120,12 @@
 #camera-container {
   display: none;
 }
+#camera-container #positioninfo {
+  position: fixed;
+  top: 0.5rem;
+  left: 8rem;
+  font-size: 1.5rem;
+}
 #camera-container #camera-exit {
   top: 2rem;
   left: 2rem;
@@ -175,31 +183,33 @@
   right: 20px;
   z-index: 2;
 }
+#camera-container #shoot-again-btn:active {
+  transform: scale(0.9);
+}
 #camera-container #shoot-again-btn {
   display: block;
   background-color: white;
   position: absolute;
-  transform: translate(-50%, 0%);
   height: 8rem;
   width: 8rem;
-  border-radius: 20%;
-  bottom: 3rem;
-  left: 25%;
-  border: solid #BBB 1rem;
-  font-size: 50px;
+  padding: 1rem;
+  border-radius: 2rem;
+  bottom: 3.5rem;
+  left: 21%;
+}
+#camera-container #goto-list-btn:active {
+  transform: scale(0.9);
 }
 #camera-container #goto-list-btn {
   display: block;
   background-color: white;
   position: absolute;
-  transform: translate(-50%, 0%);
   height: 8rem;
   width: 8rem;
-  border-radius: 20%;
-  bottom: 3rem;
-  left: 75%;
-  border: solid #BBB 1rem;
-  font-size: 50px;
+  padding: 1rem;
+  border-radius: 2rem;
+  bottom: 3.5rem;
+  right: 21%;
 }
 #favorite-container {
   display: none;
