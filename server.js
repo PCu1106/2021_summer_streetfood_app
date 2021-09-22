@@ -48,6 +48,22 @@ app.get('/', function (req, res) {
   });  
 });
 
+app.listen(port, "127.0.0.1", () => {
+  console.log('Server is running on http://127.0.0.1:' + port);
+});
+//------------------------------------------------------------------------------
+
+//-----run these code when you are on server-------------------------------------
+// var credentials = { key:hskey, cert:hscert};
+// app.get('/', function(req, res) {
+//   res.sendFile(path.join(__dirname + '/templates/dist/homepage.html')); 
+// });
+// var server = https.createServer(credentials,app);
+// server.listen(port, "foodcam.tk", function() {
+//   console.log('Server is running on ' + port + ' port...');
+// });
+//-------------------------------------------------------------------------------
+
 function sql() {
   var sqlite3 = require("sqlite3").verbose();
   var db = new sqlite3.Database(file);
@@ -92,9 +108,6 @@ function render(filename, callback) {
   });
 };
 
-app.listen(port, "127.0.0.1", () => {
-  console.log('Server is running on http://127.0.0.1:' + port);
-});
 
 //login
 var sqlite3 = require('sqlite3').verbose()
@@ -152,16 +165,3 @@ app.post('/templates/dist/register', (req, res) => {
   }
 });
 
-//------------------------------------------------------------------------------
-
-
-//-----run these code when you are on server---------
-// var credentials = { key:hskey, cert:hscert};
-// app.get('/', function(req, res) {
-//   res.sendFile(path.join(__dirname + '/templates/dist/homepage.html')); 
-// });
-// var server = https.createServer(credentials,app);
-// server.listen(port, "foodcam.tk", function() {
-//   console.log('Server is running on ' + port + ' port...');
-// });
-//---------------------------------------------------

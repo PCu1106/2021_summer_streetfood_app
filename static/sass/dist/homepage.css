@@ -120,6 +120,12 @@
 #camera-container {
   display: none;
 }
+#camera-container #positioninfo {
+  position: fixed;
+  top: 0.5rem;
+  left: 8rem;
+  font-size: 1.5rem;
+}
 #camera-container #camera-exit {
   top: 2rem;
   left: 2rem;
