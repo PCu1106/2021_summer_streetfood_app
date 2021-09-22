@@ -25,7 +25,7 @@ html
 
     #camera-container.container
       img#camera-exit.exit-btn(src='../../static/file/previous-icon-w.png')
-      video#cam-window(autoplay playsinline)
+      video#cam-window(autoplay)
       canvas#cam-sensor 
       //- for debug
       div#positioninfo
@@ -33,17 +33,10 @@ html
           span#alpha
         h1 定位
           span#geoinfo
-
-      //- for debug
-      video#cam-window(autoplay)
-      canvas#cam-sensor
       img#cam-output(src="//:0")(alt="")
       #shoot-btn
       img#shoot-again-btn(src='../../static/file/camera.png')
       img#goto-list-btn(src='../../static/file/list.png')
-
-      #shoot-again-btn Again
-      #goto-list-btn List
       #restaurant-list.list
         h1.title(align='center')
           b 商家資訊
