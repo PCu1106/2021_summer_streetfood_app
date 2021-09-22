@@ -140,8 +140,7 @@ app.post('/templates/dist/login', (req, res) => {
       res.send("帳號或密碼不能空白！");
   }
 });
-
-<<<<<<< HEAD
+ 
 // list
 app.post('/list', (req, res) =>{
   let pyshell = new PythonShell('./pythonfunc/dectect_picture.py');
@@ -165,7 +164,6 @@ app.post('/list', (req, res) =>{
 
 //------------------------------------------------------------------------------
 
-=======
 //register
 app.post('/templates/dist/register', (req, res) => {
   if (req.body.account != "" && req.body.password != "") {
@@ -189,5 +187,4 @@ app.post('/templates/dist/register', (req, res) => {
       res.send("帳號或密碼不能空白！");
   }
 });
->>>>>>> da2a511016c36b53018c329cf83ef34781429348
 
