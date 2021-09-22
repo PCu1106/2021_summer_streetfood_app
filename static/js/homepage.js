@@ -55,6 +55,7 @@ $(document).ready(function(){
       $("#shoot-btn").show();
       $("#shoot-again-btn").hide();
       $("#goto-list-btn").hide();
+      $("#restaurant-list").hide();
       console.log('hide')
     }, 1000); 
     cameraOutput.style.display = "none";
@@ -111,6 +112,13 @@ $(document).ready(function(){
     $("#goto-list-btn").hide();
     cameraOutput.style.display = "none";
     cameraStart();
+  });
+
+  $("#goto-list-btn").click(function(){
+    $("#goto-list-btn").hide();
+    $("#shoot-again-btn").hide();
+    $("#cam-output").hide();
+    $("#restaurant-list").show();
   });
   
   //check gps signal each 10 sec and show with icon

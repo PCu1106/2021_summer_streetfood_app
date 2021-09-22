@@ -41,11 +41,37 @@ html
       #shoot-btn
       img#shoot-again-btn(src='../../static/file/camera.png')
       img#goto-list-btn(src='../../static/file/list.png')
-      #restaurant-list.list 
-        #element-1.elements
-        #element-2.elements
-        #element-3.elements
-        #element-4.elements
+
+      #shoot-again-btn Again
+      #goto-list-btn List
+      #restaurant-list.list
+        h1.title(align='center')
+          b 商家資訊
+        .shop-item
+          p.shop-name(align='center') 大夯牛排館 Da-hang Steak house
+          p.score 4.4
+          .ratings
+            .empty_star ★★★★★
+            .full_star ★★★★★
+          p.command 1825則評論
+          a.phone-number(href='tel:062365768') 電話:06-2365768
+          p.business-hours 營業時間:11:00-21:00
+          .small-block 電話
+          .small-block 網站
+          .small-block 儲存
+
+        .shop-item
+          p.shop-name(align='center') 大夯牛排館 Da-hang Steak house
+          p.score 4.4
+          .ratings
+            .empty_star ★★★★★
+            .full_star ★★★★★
+          p.command 1825則評論
+          p.phone-number 電話:06-2365768
+          p.business-hours 營業時間:11:00-21:00
+          .small-block 電話
+          .small-block 網站
+          .small-block 儲存
       script.
         //- if(navigator.geolocation) {
         //-   navigator.geolocation.getCurrentPosition(function(position){
