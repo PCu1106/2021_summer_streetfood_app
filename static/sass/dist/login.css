@@ -1,0 +1,6 @@
+form#login {
+  display: block;
+}
+form#register {
+  display: none;
+}

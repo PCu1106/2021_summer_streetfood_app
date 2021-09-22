@@ -55,6 +55,7 @@ $(document).ready(function(){
       $("#shoot-btn").show();
       $("#shoot-again-btn").hide();
       $("#goto-list-btn").hide();
+      $("#restaurant-list").hide();
       console.log('hide')
     }, 1000); 
     cameraOutput.style.display = "none";
@@ -112,6 +113,7 @@ $(document).ready(function(){
     cameraOutput.style.display = "none";
     cameraStart();
   });
+<<<<<<< HEAD
   // list 
   $("#goto-list-btn").click(function(){
     //$("#restaurant-list").show();
@@ -132,6 +134,16 @@ $(document).ready(function(){
       }
     });
   });
+=======
+
+  $("#goto-list-btn").click(function(){
+    $("#goto-list-btn").hide();
+    $("#shoot-again-btn").hide();
+    $("#cam-output").hide();
+    $("#restaurant-list").show();
+  });
+  
+>>>>>>> da2a511016c36b53018c329cf83ef34781429348
   //check gps signal each 10 sec and show with icon
   nonew = 0
   let intervalId = window.setInterval(function(){
@@ -155,6 +167,10 @@ function geo_success(position) {
     $('#gps-signal').attr('src', '../../static/file/gps-y.png')
     last_timestamp = position.timestamp;
     console.log(position);
+    var a = document.getElementById('geoinfo');
+    latitude = Number((position.coords.latitude).toFixed(3)).toString();
+    longitude = Number((position.coords.longitude).toFixed(3)).toString();
+    a.innerHTML = latitude + ', ' + longitude
     nonew = 0
   }
   else{
@@ -162,7 +178,8 @@ function geo_success(position) {
     // console.log(nonew)
     nonew += 1
     if (nonew > 5){
-    $('#gps-signal').attr('src', '../../static/file/gps-weak.png')
+      $('#gps-signal').attr('src', '../../static/file/gps-weak.png')
+      document.getElementById('geoinfo').innerHTML = 'confirming'
     }
   }
 };
@@ -171,6 +188,7 @@ function geo_error(error) {
   console.log(error.message);
   $('#gps-signal').attr('src', '../../static/file/gps-n.png')
   // console.log(position);
+  document.getElementById('geoinfo').innerHTML = 'no permission'
 };
 
 if(window.DeviceOrientationEvent) {

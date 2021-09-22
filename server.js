@@ -42,23 +42,43 @@ app.get('/python', function(req, res){
 //---------------run these code when you are local------------------------------
 app.get('/', function (req, res) {
   console.log(`${__dirname+'/static'}`);
-  
-  // res.sendFile(path.join(__dirname + '/templates/dist/login.html'));
-  var sqlite3 = require("sqlite3").verbose();
-  var db = new sqlite3.Database(file);
-  var sqlselect = "SELECT a.NAME FROM table3 as a INNER JOIN hitstory_01 as b ON a.ID = b.shopID;";
-  var x = 1;
-  var param = {};
-  db.each(sqlselect, function(err, row) {
-    //console.log(row.ID + ": " + row.NAME);
-    //add(2);
-    sqlgetdata(row.NAME, x, param);
-    x++;
-  });
-  render(path.join(__dirname + '/templates/dist/homepage.html'), param,  function (err, data) {
+  //res.sendFile(path.join(__dirname + '/templates/dist/index.html'));
+  render(path.join(__dirname + '/templates/dist/homepage.html'),  function (err, data) {
     res.send(data);
   });  
 });
+
+app.listen(port, "127.0.0.1", () => {
+  console.log('Server is running on http://127.0.0.1:' + port);
+});
+//------------------------------------------------------------------------------
+
+//-----run these code when you are on server-------------------------------------
+// var credentials = { key:hskey, cert:hscert};
+// app.get('/', function(req, res) {
+//   res.sendFile(path.join(__dirname + '/templates/dist/homepage.html')); 
+// });
+// var server = https.createServer(credentials,app);
+// server.listen(port, "foodcam.tk", function() {
+//   console.log('Server is running on ' + port + ' port...');
+// });
+//-------------------------------------------------------------------------------
+
+function sql() {
+  var sqlite3 = require("sqlite3").verbose();
+  var db = new sqlite3.Database(file);
+  var sqlselect = "SELECT * FROM table3 as a INNER JOIN hitstory_01 as b ON a.ID = b.shopID;";
+  var x = 1;
+  var param = {};
+  db.each(sqlselect, function(err, row) {
+    console.log(row.ID + ": " + row.NAME);
+    sqlgetdata(row.NAME, x, param);
+    x++;
+  });
+  db.close();
+  console.log(param);
+  return param;
+}
 
 function sqlgetdata(name, x, param){
   var key = 'shopname' + x;
@@ -66,24 +86,28 @@ function sqlgetdata(name, x, param){
   param[key] = data;
 }
 
-function render(filename, params, callback) {
-  fs.readFile(filename, 'utf8', function (err, data) {
-    console.log('render');
+function wait(ms) {
+  return new Promise(resolve =>setTimeout(() =>resolve(), ms));
+};
+
+function render(filename, callback) {
+  fs.readFile(filename, 'utf8', async function (err, data) {
     if (err) return callback(err);
+    var params = {};
+    params = sql();
     var x = 1;
+    console.log(params);
+    await wait(200);
     for (var key in params) {
       console.log('params[' + key  + ']' + params[key]);
       block = '<div class="shop-item"><p class="shop-name" align="center">' + params[key] + '</p><p class="score">{score' + x + '}</p><p class="score">4.4</p><div class="ratings"><div class="empty_star">★★★★★</div><div class="full_star">★★★★★</div></div><p class="command">1825則評論</p><p class="phone-number">電話:06-2365768</p><p class="business-hours">營業時間:11:00-21:00</p><div class="small-block">電話</div><div class="small-block">網站</div><div class="small-block">儲存</div></div>';
       data = data.replace('<!-- {' + key  + '} -->', block);
-      console.log(data);
       x++;
     }
     callback(null, data);
   });
-}
-app.listen(port, "127.0.0.1", () => {
-  console.log('Server is running on http://127.0.0.1:' + port);
-});
+};
+
 
 //login
 var sqlite3 = require('sqlite3').verbose()
@@ -117,6 +141,7 @@ app.post('/templates/dist/login', (req, res) => {
   }
 });
 
+<<<<<<< HEAD
 // list
 app.post('/list', (req, res) =>{
   let pyshell = new PythonShell('./pythonfunc/dectect_picture.py');
@@ -140,14 +165,29 @@ app.post('/list', (req, res) =>{
 
 //------------------------------------------------------------------------------
 
+=======
+//register
+app.post('/templates/dist/register', (req, res) => {
+  if (req.body.account != "" && req.body.password != "") {
+    db_user.get("SELECT account FROM users WHERE account = ?", [req.body.account], function(err, row) {
+      if (row == undefined) {
+        if (req.body.passwordagain==req.body.password){
+          db_user.serialize(function() {
+            db_user.run("CREATE TABLE IF NOT EXISTS users (account INTEGER, password INTEGER)");
+            db_user.run("INSERT INTO users (account, password) VALUES (?, ?)", [req.body.account, req.body.password]);
+            });
+            res.send("註冊成功！將為您跳轉到登入畫面");
+        }else{
+          res.send("密碼不符，請再次確認！");
+        }
+        
+      } else {
+          res.send("帳號已存在！");
+        }
+      })
+  } else {
+      res.send("帳號或密碼不能空白！");
+  }
+});
+>>>>>>> da2a511016c36b53018c329cf83ef34781429348
 
-//-----run these code when you are on server---------
-// var credentials = { key:hskey, cert:hscert};
-// app.get('/', function(req, res) {
-//   res.sendFile(path.join(__dirname + '/templates/dist/homepage.html')); 
-// });
-// var server = https.createServer(credentials,app);
-// server.listen(port, "foodcam.tk", function() {
-//   console.log('Server is running on ' + port + ' port...');
-// });
-//---------------------------------------------------
