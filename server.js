@@ -63,8 +63,9 @@ app.listen(port, "127.0.0.1", () => {
 //   console.log('Server is running on ' + port + ' port...');
 // });
 //-------------------------------------------------------------------------------
+var sqlite3 = require('sqlite3').verbose()
+
 function sql_fav() {
-  var sqlite3 = require("sqlite3").verbose();
   var db = new sqlite3.Database(file);
   var sqlselect = "SELECT * FROM table3 as a INNER JOIN history_01 as b ON a.ID = b.shopID AND b.favorite == 1;";
   var x = 1;
@@ -79,14 +80,7 @@ function sql_fav() {
   return param;
 }
 
-function sqlgetdata_fav(name, x, param){
-  var key = 'favorite' + x;
-  var data = name.toString();
-  param[key] = data;
-}
-
 function sql() {
-  var sqlite3 = require("sqlite3").verbose();
   var db = new sqlite3.Database(file);
   var sqlselect = "SELECT * FROM table3 as a INNER JOIN history_01 as b ON a.ID = b.shopID;";
   var x = 1;
@@ -134,12 +128,15 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 app.post('/save', urlencodedParser, (req, res) => {
   if (req.body.id != ""){
     console.log('favorite: ' + req.body.id);
+    var db = new sqlite3.Database(file);
+    var sql = "UPDATE history_01 SET favorite = 1 WHERE shopID = " + req.body.id + ";";
+    db.run(sql);
+    db.close();
     res.send(req.body.id);
   }
 });
 
 //login
-var sqlite3 = require('sqlite3').verbose()
 var db_user = new sqlite3.Database("users.db");
 
 app.use(bodyParser.json({ limit: "1mb", extended: true }));
