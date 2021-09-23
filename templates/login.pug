@@ -3,7 +3,7 @@ head
     title livefood
     meta(charset='UTF-8')
     meta(name="theme-color" content="#44617B")
-    link(href="../../static/sass/dist/homepage.css",rel="stylesheet",type="text/css")
+    //- link(href="../../static/sass/dist/homepage.css",rel="stylesheet",type="text/css")
     link(href="../../static/sass/dist/login.css",rel="stylesheet",type="text/css")
     
     script(src="https://code.jquery.com/jquery-3.6.0.min.js")
@@ -11,27 +11,28 @@ body
     .container
         .title Food cam
         form#login 
-            h1 登入
-            label(for="username") 帳號 
-            input(type="text" name="username")
-            br
-            label(for="password") 密碼
-            input(type="password" name="password") 
-            br
-            #signin-output
+            .input-container 
+                label(for="username") 帳號 
+                br
+                input(type="text" name="username")
+                br
+                label(for="password") 密碼
+                br
+                input(type="password" name="password") 
+                #signin-output
             button(class="reg" type='submit') 註冊
             button(class="log" type='submit') 登入
         form#register
-            h1 註冊
-            label(for="re_username") 帳號 
-            input(type="text" name="re_username")
-            br
-            label(for="re_password") 密碼
-            input(type="password" name="re_password") 
-            br
-            label(for="re_passwordagain") 確認密碼
-            input(type="password" name="re_passwordagain") 
-            br
-            #register-output
+            .input-container
+                label(for="re_username") 帳號 
+                input(type="text" name="re_username")
+                br
+                label(for="re_password") 密碼
+                input(type="password" name="re_password") 
+                br
+                label(for="re_passwordagain") 確認密碼
+                input(type="password" name="re_passwordagain") 
+                br
+                #register-output
             button(class="create" type='submit') 確定
     script(src='../../static/js/login.js')

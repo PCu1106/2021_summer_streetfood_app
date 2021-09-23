@@ -3,7 +3,6 @@
   <title>livefood</title>
   <meta charset="UTF-8"/>
   <meta name="theme-color" content="#44617B"/>
-  <link href="../../static/sass/dist/homepage.css" rel="stylesheet" type="text/css"/>
   <link href="../../static/sass/dist/login.css" rel="stylesheet" type="text/css"/>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -11,24 +10,26 @@
   <div class="container">
     <div class="title">Food cam</div>
     <form id="login"> 
-      <h1>登入</h1>
-      <label for="username">帳號 </label>
-      <input type="text" name="username"/><br/>
-      <label for="password">密碼</label>
-      <input type="password" name="password"/><br/>
-      <div id="signin-output"></div>
+      <div class="input-container"> 
+        <label for="username">帳號 </label><br/>
+        <input type="text" name="username"/><br/>
+        <label for="password">密碼</label><br/>
+        <input type="password" name="password"/>
+        <div id="signin-output"></div>
+      </div>
       <button class="reg" type="submit">註冊</button>
       <button class="log" type="submit">登入</button>
     </form>
     <form id="register">
-      <h1>註冊</h1>
-      <label for="re_username">帳號 </label>
-      <input type="text" name="re_username"/><br/>
-      <label for="re_password">密碼</label>
-      <input type="password" name="re_password"/><br/>
-      <label for="re_passwordagain">確認密碼</label>
-      <input type="password" name="re_passwordagain"/><br/>
-      <div id="register-output"></div>
+      <div class="input-container">
+        <label for="re_username">帳號 </label>
+        <input type="text" name="re_username"/><br/>
+        <label for="re_password">密碼</label>
+        <input type="password" name="re_password"/><br/>
+        <label for="re_passwordagain">確認密碼</label>
+        <input type="password" name="re_passwordagain"/><br/>
+        <div id="register-output"></div>
+      </div>
       <button class="create" type="submit">確定</button>
     </form>
   </div>
