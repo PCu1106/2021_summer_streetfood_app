@@ -220,4 +220,9 @@ if(window.DeviceOrientationEvent) {
 //-----------------favorite action---------------
 function save(elem) {
   console.log(elem.value);
+  $.post('/save', {
+    id: elem.value
+  }, (data) => {
+      console.log('return: ' + data);
+  })
 }

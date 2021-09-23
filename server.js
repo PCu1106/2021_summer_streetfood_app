@@ -113,7 +113,6 @@ function render(filename, callback) {
     var params = {};
     var params_fav = {};
     params = sql();
-    console.log(paramsid);
     params_fav = sql_fav();
     await wait(200);
     for (var key in params) {
@@ -130,11 +129,18 @@ function render(filename, callback) {
   });
 };
 
+const bodyParser = require('body-parser');
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+app.post('/save', urlencodedParser, (req, res) => {
+  if (req.body.id != ""){
+    console.log('favorite: ' + req.body.id);
+    res.send(req.body.id);
+  }
+});
 
 //login
 var sqlite3 = require('sqlite3').verbose()
 var db_user = new sqlite3.Database("users.db");
-const bodyParser = require('body-parser')
 
 app.use(bodyParser.json({ limit: "1mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "1mb", extended: true }));
