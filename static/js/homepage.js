@@ -167,8 +167,6 @@ $(document).ready(function(){
   }, 1000);
 })
 
-
-
 //-----------------geo function---------------
 var geo_options = {
   enableHighAccuracy: true,
@@ -218,3 +216,8 @@ if(window.DeviceOrientationEvent) {
 }else{
   document.querySelector('body').innerHTML = '你的瀏覽器不支援喔';
 }
+
+  //-----------------favorite action---------------
+  function save(elem) {
+    console.log(elem.value);
+  }

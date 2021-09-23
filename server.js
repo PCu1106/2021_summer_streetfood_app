@@ -71,12 +71,11 @@ function sql() {
   var x = 1;
   var param = {};
   db.each(sqlselect, function(err, row) {
-    console.log(row.ID + ": " + row.NAME);
+    //console.log(row.ID + ": " + row.NAME);
     sqlgetdata(row.NAME, x, param);
     x++;
   });
   db.close();
-  console.log(param);
   return param;
 }
 
@@ -87,12 +86,11 @@ function sql_fav() {
   var x = 1;
   var param = {};
   db.each(sqlselect, function(err, row) {
-    console.log("favorite " + row.ID + ": " + row.NAME);
+    //console.log("favorite " + row.ID + ": " + row.NAME);
     sqlgetdata_fav(row.NAME, x, param);
     x++;
   });
   db.close();
-  console.log(param);
   return param;
 }
 function sqlgetdata_fav(name, x, param){
@@ -118,17 +116,15 @@ function render(filename, callback) {
     var params_fav = {};
     params = sql();
     params_fav = sql_fav();
-    console.log(params);
-    console.log(params_fav);
     await wait(200);
     for (var key in params) {
-      console.log('params[' + key  + ']' + params[key]);
-      block = '<div class="shop-item"><p class="shop-name" align="center">' + params[key] + '</p><p class="score">4.4</p><div class="ratings"><div class="empty_star">★★★★★</div><div class="full_star">★★★★★</div></div><p class="command">1825則評論</p><p class="phone-number">電話:06-2365768</p><p class="business-hours">營業時間:11:00-21:00</p><div class="small-block">電話</div><div class="small-block">網站</div><div class="small-block">儲存</div></div>';
+      //console.log('params[' + key  + ']' + params[key]);
+      block = '<div class="shop-item"><p class="shop-name" align="center">' + params[key] + '</p><p class="score">4.4</p><div class="ratings"><div class="empty_star">★★★★★</div><div class="full_star">★★★★★</div></div><p class="command">1825則評論</p><p class="phone-number">電話:06-2365768</p><p class="business-hours">營業時間:11:00-21:00</p><div class="small-block">電話</div><div class="small-block">網站</div><button onclick="save(this);" class="save-btn" value="' + params[key] + '">儲存</button></div>';
       data = data.replace('<!-- {' + key  + '} -->', block);
     }
     for (var key in params_fav) {
-      console.log('params_fav[' + key  + ']' + params_fav[key]);
-      block = '<div class="shop-item"><p class="shop-name" align="center">' + params_fav[key] + '</p><p class="score">4.4</p><div class="ratings"><div class="empty_star">★★★★★</div><div class="full_star">★★★★★</div></div><p class="command">1825則評論</p><p class="phone-number">電話:06-2365768</p><p class="business-hours">營業時間:11:00-21:00</p><div class="small-block">電話</div><div class="small-block">網站</div><div class="small-block">儲存</div></div>';
+      //console.log('params_fav[' + key  + ']' + params_fav[key]);
+      block = '<div class="shop-item"><p class="shop-name" align="center">' + params_fav[key] + '</p><p class="score">4.4</p><div class="ratings"><div class="empty_star">★★★★★</div><div class="full_star">★★★★★</div></div><p class="command">1825則評論</p><p class="phone-number">電話:06-2365768</p><p class="business-hours">營業時間:11:00-21:00</p><div class="small-block">電話</div><div class="small-block">網站</div></div>';
       data = data.replace('<!-- {' + key  + '} -->', block);
     }
     callback(null, data);
