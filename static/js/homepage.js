@@ -217,7 +217,7 @@ if(window.DeviceOrientationEvent) {
   document.querySelector('body').innerHTML = '你的瀏覽器不支援喔';
 }
 
-  //-----------------favorite action---------------
-  function save(elem) {
-    console.log(elem.value);
-  }
+//-----------------favorite action---------------
+function save(elem) {
+  console.log(elem.value);
+}
