@@ -13,14 +13,15 @@ $(document).ready(function(){
     navigator.mediaDevices
       .getUserMedia(constraints)
       .then(function(stream) {
-        Window.stream = stream;
+        //Window.stream = stream;
         cameraWindow.srcObject = stream;
         cameraWindow.play();
-        console.log(Window.stream); //show MediaStream info
+        //console.log(Window.stream); //show MediaStream info
       })
       .catch(function(error){
         console.error('something is broken.',error);
       });
+      imgCapture(); //capture image and return image base64 code every second
   }
 
   function cameraStop() {
@@ -43,7 +44,31 @@ $(document).ready(function(){
     cameraSensor.height = cameraWindow.videoHeight;
     cameraSensor.getContext("2d").drawImage(cameraWindow, 0, 0,cameraSensor.width,cameraSensor.height);
     cameraOutput.src = cameraSensor.toDataURL("image/png");
-    cameraOutput.classList.add("taken");
+  }
+
+  function imgCapture() {
+    console.log('capture')
+    window.setInterval(function(){
+      cameraSensor.width = cameraWindow.videoWidth;
+      cameraSensor.height = cameraWindow.videoHeight;
+      cameraSensor.getContext("2d").drawImage(cameraWindow, 0, 0,cameraSensor.width,cameraSensor.height);
+      var img = cameraSensor.toDataURL("image/png");
+      //console.log(img);
+      // --------send base64 to server----------
+      //$.ajax({
+      //  data : img,
+      //  url : '/list',
+      //  type : 'post',
+      //  dataType : 'json',
+      //  success : function(data){
+      //    console.log(data);
+      //  },
+      //  error : function(jqXHR, textStatus, errorThrown){
+      //    alert(jqXHR.textStatus);
+      //  }
+      //});
+      //---------------------------------------
+    },3000);
   }
 
   //-----------------page switch---------------
@@ -145,8 +170,6 @@ $(document).ready(function(){
   }, 1000);
 })
 
-
-
 //-----------------geo function---------------
 var geo_options = {
   enableHighAccuracy: true,
@@ -195,4 +218,14 @@ if(window.DeviceOrientationEvent) {
   false);
 }else{
   document.querySelector('body').innerHTML = '你的瀏覽器不支援喔';
+}
+
+//-----------------favorite action---------------
+function save(elem) {
+  console.log(elem.value);
+  $.post('/save', {
+    id: elem.value
+  }, (data) => {
+      console.log('return: ' + data);
+  })
 }

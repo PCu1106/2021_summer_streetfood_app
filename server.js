@@ -62,56 +62,81 @@ app.listen(port, "127.0.0.1", () => {
 //   console.log('Server is running on ' + port + ' port...');
 // });
 //-------------------------------------------------------------------------------
+var sqlite3 = require('sqlite3').verbose()
 
-function sql() {
-  var sqlite3 = require("sqlite3").verbose();
+function sql_fav() {
   var db = new sqlite3.Database(file);
-  var sqlselect = "SELECT * FROM `table3` as a INNER JOIN `hitstory_01` as b ON a.ID = b.shopID;";
+  var sqlselect = "SELECT * FROM table3 as a INNER JOIN history_01 as b ON a.ID = b.shopID AND b.favorite == 1;";
   var x = 1;
   var param = {};
   db.each(sqlselect, function(err, row) {
-    console.log(row.ID + ": " + row.NAME);
-    sqlgetdata(row.NAME, x, param);
+    //console.log("favorite " + row.ID + ": " + row.NAME);
+    var key = 'favorite' + x;
+    param[key] = row.NAME.toString();
     x++;
   });
   db.close();
-  console.log(param);
   return param;
 }
 
-function sqlgetdata(name, x, param){
-  var key = 'shopname' + x;
-  var data = name.toString();
-  param[key] = data;
+function sql() {
+  var db = new sqlite3.Database(file);
+  var sqlselect = "SELECT * FROM table3 as a INNER JOIN history_01 as b ON a.ID = b.shopID;";
+  var x = 1;
+  var param = {};
+  db.each(sqlselect, function(err, row) {
+    //console.log(row.ID + ": " + row.NAME);
+    var key = 'shopname' + x;
+    param[key] = row.NAME.toString();
+    paramsid[key] = row.ID;
+    x++;
+  });
+  db.close();
+  return param;
 }
 
 function wait(ms) {
   return new Promise(resolve =>setTimeout(() =>resolve(), ms));
 };
 
+var paramsid = {};
 function render(filename, callback) {
   fs.readFile(filename, 'utf8', async function (err, data) {
     if (err) return callback(err);
     var params = {};
+    var params_fav = {};
     params = sql();
-    var x = 1;
-    console.log(params);
+    params_fav = sql_fav();
     await wait(200);
     for (var key in params) {
-      console.log('params[' + key  + ']' + params[key]);
-      block = '<div class="shop-item"><p class="shop-name" align="center">' + params[key] + '</p><p class="score">{score' + x + '}</p><p class="score">4.4</p><div class="ratings"><div class="empty_star">★★★★★</div><div class="full_star">★★★★★</div></div><p class="command">1825則評論</p><p class="phone-number">電話:06-2365768</p><p class="business-hours">營業時間:11:00-21:00</p><div class="small-block">電話</div><div class="small-block">網站</div><div class="small-block">儲存</div></div>';
+      //console.log('params[' + key  + ']' + params[key]);
+      block = '<div class="shop-item"><p class="shop-name" align="center">' + params[key] + '</p><p class="score">4.4</p><div class="ratings"><div class="empty_star">★★★★★</div><div class="full_star">★★★★★</div></div><p class="command">1825則評論</p><p class="phone-number">電話:06-2365768</p><p class="business-hours">營業時間:11:00-21:00</p><div class="small-block">電話</div><div class="small-block">網站</div><button onclick="save(this);" class="save-btn" value="' + paramsid[key] + '">儲存</button></div>';
       data = data.replace('<!-- {' + key  + '} -->', block);
-      x++;
+    }
+    for (var key in params_fav) {
+      //console.log('params_fav[' + key  + ']' + params_fav[key]);
+      block = '<div class="shop-item"><p class="shop-name" align="center">' + params_fav[key] + '</p><p class="score">4.4</p><div class="ratings"><div class="empty_star">★★★★★</div><div class="full_star">★★★★★</div></div><p class="command">1825則評論</p><p class="phone-number">電話:06-2365768</p><p class="business-hours">營業時間:11:00-21:00</p><div class="small-block">電話</div><div class="small-block">網站</div></div>';
+      data = data.replace('<!-- {' + key  + '} -->', block);
     }
     callback(null, data);
   });
 };
 
+const bodyParser = require('body-parser');
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+app.post('/save', urlencodedParser, (req, res) => {
+  if (req.body.id != ""){
+    console.log('favorite: ' + req.body.id);
+    var db = new sqlite3.Database(file);
+    var sql = "UPDATE history_01 SET favorite = 1 WHERE shopID = " + req.body.id + ";";
+    db.run(sql);
+    db.close();
+    res.send(req.body.id);
+  }
+});
 
 //login
-var sqlite3 = require('sqlite3').verbose()
 var db_user = new sqlite3.Database("users.db");
-const bodyParser = require('body-parser')
 
 app.use(bodyParser.json({ limit: "1mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "1mb", extended: true }));
