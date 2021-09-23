@@ -2,6 +2,13 @@ import base64
 import numpy as np
 import cv2
 
+def encode_64(img_name):
+    # 指定圖片並編碼成base64
+    with open(img_name, "rb") as f:
+        img = f.read()
+    img_encode = base64.b64encode(img)
+    return img_encode
+
 def decode_64(img_encode):
     # decode img from base64
     img_decode = base64.b64decode(img_encode)

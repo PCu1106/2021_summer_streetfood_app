@@ -9,7 +9,8 @@
     "jquery": "^3.6.0",
     "nodemon": "^2.0.12",
     "python-shell": "^3.0.0",
-    "sqlite3": "^4.2.0"
+    "sqlite3": "^4.2.0",
+    "utf8": "^3.0.0"
   },
   "devDependencies": {},
   "scripts": {

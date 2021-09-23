@@ -122,13 +122,16 @@ $(document).ready(function(){
     $("#restaurant-list").show();
     var img = { img_64 : document.getElementById("cam-output").getAttribute("src")};
     // send base64 to server
+    console.log('list');
     $.ajax({
       data : img,
       url : '/list',
       type : 'post',
       dataType : 'json',
-      success : function(data){
-        console.log(data);
+      success : function(result){
+        // if received data correctly
+        // result : [ ]
+        console.log(result.name_list)
       },
       error : function(jqXHR, textStatus, errorThrown){
         alert(jqXHR.textStatus);

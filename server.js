@@ -2,7 +2,6 @@ var fs = require('fs');
 var https = require('https');
 var path = require('path');
 var express = require('express');
-
 var file = "test.db";
 let {PythonShell} = require('python-shell')
 
@@ -67,7 +66,7 @@ app.listen(port, "127.0.0.1", () => {
 function sql() {
   var sqlite3 = require("sqlite3").verbose();
   var db = new sqlite3.Database(file);
-  var sqlselect = "SELECT * FROM table3 as a INNER JOIN hitstory_01 as b ON a.ID = b.shopID;";
+  var sqlselect = "SELECT * FROM `table3` as a INNER JOIN `hitstory_01` as b ON a.ID = b.shopID;";
   var x = 1;
   var param = {};
   db.each(sqlselect, function(err, row) {
@@ -143,14 +142,29 @@ app.post('/templates/dist/login', (req, res) => {
  
 // list
 app.post('/list', (req, res) =>{
+
   let pyshell = new PythonShell('./pythonfunc/dectect_picture.py');
   // send base64 string to python stdin
-  pyshell.send(req.body.img_64)
-
+  console.log('send data to python shell');
+  pyshell.send(req.body.img_64);
   // received a message from Python script (ex:print (xxx) )
   pyshell.on('message', function (message) {
+    console.log('received store name list');
+    console.log(`type is : ${typeof message}`);
     console.log(message);
-    res.send(message);
+    // message內容為 b'["\uXXXX\uXXXX..\uXXXX","\u...\u"]' 型態為string
+    // 用正規表示式對 \uXXXX (UTF-16編碼)做decode
+    let tmp = message.replace( /\\u([a-fA-F0-9]{4})/g, function(g, m1) {
+      return String.fromCharCode(parseInt(m1, 16));
+    })
+    // 針對decode完的結果做刪減並型態轉換
+    // ex: string [ '"飽芝林關東煮"', '"個別指導明光義塾 台南後甲教室"' ]
+    //  => array ['飽芝林關東煮', '個別指導明光義塾 台南後甲教室'] 
+    const final_list = tmp.substring(1,tmp.length-1).replace(/\"/g,'').split(',');
+    console.log(final_list);
+    // 最後打包成json型態回傳
+    var result = { "name_list" : final_list}
+    res.json(result);
   });
   
   // end the input stream and allow the process to exit

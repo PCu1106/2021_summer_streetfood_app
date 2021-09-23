@@ -15,6 +15,7 @@ install OpenCV
 
 !pip install -i https://pypi.tuna.tsinghua.edu.cn/simple opencv-contrib-python==3.4.2.17
 """
+from base64 import encode
 import json
 import os
 import cv2
@@ -23,7 +24,7 @@ from sklearn.cluster import KMeans
 import csv
 import sqlite3
 import pandas as pd
-from decoder import decode_64
+from decoder import encode_64, decode_64
 
 ## search name,feature stored in test.db
 def search(longitude,latitude,direction):#接收使用者經緯度跟方向，回傳可能看的到的商店名字跟feature
@@ -43,9 +44,12 @@ def search(longitude,latitude,direction):#接收使用者經緯度跟方向，�
         for i in range(len(a)):
                 b=a[i][1:].split('.')[:-1]
                 list_a=[]
+                
                 for j in range(len(b)):
-                    list_a.append(float(b[j]))
+                    list_a.append(b[j])
+
                 list_b.append(list_a)
+                
         name.append(row[1])
         feature.append(list_b)
         #row[1]、list_b
@@ -103,8 +107,8 @@ def FLANN_Matching(img_base64, tr_name_list ,tr_desc_list):
             index_params = dict(algorithm = FLANN_INDEX_KDTREE, trees = 5)
             search_params = dict(checks=20)   # or pass empty dictionary
             flann = cv2.FlannBasedMatcher(index_params,search_params)
-            matches = flann.knnMatch(tr_desc_list[s], desc_test,k=2)
-
+            #matches = flann.knnMatch(tr_desc_list[s], desc_test,k=2)
+            matches = flann.knnMatch(np.asarray(tr_desc_list[s],np.float32),np.asarray(desc_test,np.float32), k=2)
             # Need to draw only good matches, so create a mask
             matchesMask = []
             
@@ -148,8 +152,9 @@ def FLANN_Matching(img_base64, tr_name_list ,tr_desc_list):
 
       max_tmp_correct_index=[]
       length=(len(max_tmp_index_list))       
-    
-      max_tmp_correct_index.append(max_tmp_index_list[length-1]) 
+      # 強制回傳一個結果
+      #max_tmp_correct_index.append(max_tmp_index_list[length-1]) 
+      #max_tmp_correct_index.append(max_tmp_index_list[length-2]) 
 
         
       for i in range(len(max_tmp_list)-1):
@@ -171,7 +176,7 @@ def FLANN_Matching(img_base64, tr_name_list ,tr_desc_list):
 
     for i in range(len(max_correct_index)):
 
-      store_name=[]
+      #store_name=[]
  
       for j in range(len(max_correct_index[i])):
 
@@ -180,21 +185,21 @@ def FLANN_Matching(img_base64, tr_name_list ,tr_desc_list):
         #print("The resemble stores: ")
         #print("name: ",tr_name_list[s]) #輸出相似店家名稱
         
-        store_name.append(tr_name_list[s])
+        resemble_store_name_list.append(tr_name_list[s])
 
 
-      resemble_store_name_list.append(store_name)  
+      #resemble_store_name_list.append(store_name)  
        
-    return resemble_store_name_list # 2d array
-    
-    
+    return resemble_store_name_list # 1d array
     
     
 def main():
   img_base64 = input()
+  #img_base64 = encode_64("pic.JPG")
   name_list, feature_list = search(10,10,10)
   b=FLANN_Matching(img_base64.split(',')[1], name_list, feature_list)
-  result = {'success':'123'}
-  print(json.dumps(result))
+  #b=FLANN_Matching(img_base64, name_list, feature_list)
+  result = json.dumps(b)
+  print(result)
   #print(b)
 main()
