@@ -6,8 +6,10 @@ $(document).ready(function() {
             account: $('#login input[name="username"]').val(),
             password: $('#login input[name="password"]').val()
         }, (data) => {
-            if (data == 'jump')
-                window.location.href = '../../templates/dist/homepage.html';
+            if (data == 'jump'){
+                console.log('jump');
+                window.location.href = "http://127.0.0.1:8787"
+            }
             else {
                 console.log(data);
                 $("#signin-output").html(`<p>${data}</p>`)

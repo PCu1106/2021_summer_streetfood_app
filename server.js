@@ -44,7 +44,7 @@ app.get('/', function (req, res) {
   //res.sendFile(path.join(__dirname + '/templates/dist/index.html'));
   render(path.join(__dirname + '/templates/dist/homepage.html'),  function (err, data) {
     res.send(data);
-  });  
+  });
 });
 
 app.listen(port, "127.0.0.1", () => {
@@ -62,17 +62,16 @@ app.listen(port, "127.0.0.1", () => {
 //   console.log('Server is running on ' + port + ' port...');
 // });
 //-------------------------------------------------------------------------------
-
-
 var sqlite3 = require('sqlite3').verbose()
+var userid = "01";
 
 function sql_fav() {
   var db = new sqlite3.Database(file);
-  var sqlselect = "SELECT * FROM table3 as a INNER JOIN history_01 as b ON a.ID = b.shopID AND b.favorite == 1;";
+  var sqlselect = "SELECT * FROM table3 as a INNER JOIN history_" + userid + " as b ON a.ID = b.shopID AND b.favorite == 1;";
   var x = 1;
   var param = {};
   db.each(sqlselect, function(err, row) {
-    //console.log("favorite " + row.ID + ": " + row.NAME);
+    console.log("favorite " + row.ID + ": " + row.NAME);
     var key = 'favorite' + x;
     param[key] = row.NAME.toString();
     x++;
@@ -83,9 +82,10 @@ function sql_fav() {
 
 function sql() {
   var db = new sqlite3.Database(file);
-  var sqlselect = "SELECT * FROM table3 as a INNER JOIN history_01 as b ON a.ID = b.shopID;";
+  var sqlselect = "SELECT * FROM table3 as a INNER JOIN history_" + userid + " as b ON a.ID = b.shopID;";
   var x = 1;
   var param = {};
+  console.log(userid);
   db.each(sqlselect, function(err, row) {
     //console.log(row.ID + ": " + row.NAME);
     var key = 'shopname' + x;
@@ -94,6 +94,7 @@ function sql() {
     x++;
   });
   db.close();
+  console.log(param);
   return param;
 }
 
@@ -109,43 +110,39 @@ function render(filename, callback) {
     var params_fav = {};
     params = sql();
     params_fav = sql_fav();
-    await wait(200);
+    await wait(500);
     for (var key in params) {
-      //console.log('params[' + key  + ']' + params[key]);
+      console.log('params[' + key  + ']' + params[key]);
       block = '<div class="shop-item">\
-                <p class="shop-name" align="center">' + params[key] + '</p>\
-                <p class="score">4.4</p>\
-                <div class="ratings">\
-                  <div class="empty_star">★★★★★</div>\
-                  <div class="full_star">★★★★★</div>\
-                </div>\
-                <p class="command">1825則評論</p>\
-                <a class="phone-number" href="tel:06-2365768">電話:06-2365768</a>\
-                <p class="business-hours">營業時間:11:00-21:00</p>\
-                <div class="control_btn">\
-                  <button class="small-block">電話</button>\
-                  <button class="small-block">網站</button>\
-                  <button onclick="save(this);" class="save-btn" value="'+ paramsid[key] + '">儲存</button>\
-                </div>\
+              <p class="shop-name" align="center">' + params[key] + '</p>\
+              <p class="score">4.4</p>\
+              <div class="ratings">\
+              <div class="empty_star">★★★★★</div>\
+              <div class="full_star">★★★★★</div>\
+              </div>\
+              <p class="command">1825則評論</p>\
+              <p class="phone-number">電話:06-2365768</p>\
+              <p class="business-hours">營業時間:11:00-21:00</p>\
+              <div class="small-block">電話</div>\
+              <div class="small-block">網站</div>\
+              <button onclick="save(this);" class="save-btn" value="' + paramsid[key] + '">儲存</button>\
               </div>';
       data = data.replace('<!-- {' + key  + '} -->', block);
     }
     for (var key in params_fav) {
-      //console.log('params_fav[' + key  + ']' + params_fav[key]);
+      console.log('params_fav[' + key  + ']' + params_fav[key]);
       block = '<div class="shop-item">\
-                <p class="shop-name" align="center">' + params_fav[key] + '</p>\
-                <p class="score">4.4</p>\
-                <div class="ratings">\
-                  <div class="empty_star">★★★★★</div>\
-                  <div class="full_star">★★★★★</div>\
-                </div>\
-                <p class="command">1825則評論</p>\
-                <a class="phone-number" href="tel:06-2365768">電話:06-2365768</a>\
-                <p class="business-hours">營業時間:11:00-21:00</p>\
-                <div class="control_btn">\
-                  <button class="small-block">電話</button>\
-                  <button class="small-block">網站</button>\
-                </div>\
+              <p class="shop-name" align="center">' + params_fav[key] + '</p>\
+              <p class="score">4.4</p>\
+              <div class="ratings">\
+              <div class="empty_star">★★★★★</div>\
+              <div class="full_star">★★★★★</div>\
+              </div>\
+              <p class="command">1825則評論</p>\
+              <p class="phone-number">電話:06-2365768</p>\
+              <p class="business-hours">營業時間:11:00-21:00</p>\
+              <div class="small-block">電話</div>\
+              <div class="small-block">網站</div>\
               </div>';
       data = data.replace('<!-- {' + key  + '} -->', block);
     }
@@ -159,7 +156,7 @@ app.post('/save', urlencodedParser, (req, res) => {
   if (req.body.id != ""){
     console.log('favorite: ' + req.body.id);
     var db = new sqlite3.Database(file);
-    var sql = "UPDATE history_01 SET favorite = 1 WHERE shopID = " + req.body.id + ";";
+    var sql = "UPDATE history_" + userid + " SET favorite = 1 WHERE shopID = " + req.body.id + ";";
     db.run(sql);
     db.close();
     res.send(req.body.id);
@@ -180,6 +177,7 @@ app.get('/login', (req, res) => {
 
 app.post('/templates/dist/login', (req, res) => {
   if (req.body.account != "" && req.body.password != "") {
+    userid = req.body.account;
     db_user.get("SELECT password FROM users WHERE account = ?", [req.body.account], function(err, row) {
         if (row == undefined) {
             res.send("帳號不存在！");
@@ -244,6 +242,8 @@ app.post('/templates/dist/register', (req, res) => {
             db_user.run("CREATE TABLE IF NOT EXISTS users (account INTEGER, password INTEGER)");
             db_user.run("INSERT INTO users (account, password) VALUES (?, ?)", [req.body.account, req.body.password]);
             });
+            var db = new sqlite3.Database(file);
+            db.run("create table history_" + req.body.account + "(shopID, favorite);");
             res.send("註冊成功！將為您跳轉到登入畫面");
         }else{
           res.send("密碼不符，請再次確認！");
@@ -257,4 +257,3 @@ app.post('/templates/dist/register', (req, res) => {
       res.send("帳號或密碼不能空白！");
   }
 });
-
