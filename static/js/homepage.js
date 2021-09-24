@@ -21,7 +21,7 @@ $(document).ready(function(){
       .catch(function(error){
         console.error('something is broken.',error);
       });
-      imgCapture(); //capture image and return image base64 code every second
+      //imgCapture(); //capture image and return image base64 code every 3-second
   }
 
   function cameraStop() {
@@ -124,6 +124,7 @@ $(document).ready(function(){
   //-----------------cam action---------------
   $("#shoot-btn").click(function(){
     cameraSnapshot();
+    navigator.geolocation.getCurrentPosition(geo_success, geo_error, geo_options);
     cameraStop();
     $("#shoot-btn").hide();
     $("#shoot-again-btn").show();
@@ -149,7 +150,7 @@ $(document).ready(function(){
     // send base64 to server
     console.log('list');
     $.ajax({
-      data : img,
+      data : { 'img': img, 'latitude': latitude_return, 'longitude': longitude_return },
       url : '/list',
       type : 'post',
       dataType : 'json',
@@ -165,9 +166,9 @@ $(document).ready(function(){
   });
   //check gps signal each 10 sec and show with icon
   nonew = 0
-  let intervalId = window.setInterval(function(){
-    navigator.geolocation.getCurrentPosition(geo_success, geo_error, geo_options);
-  }, 1000);
+  //let intervalId = window.setInterval(function(){
+  //  navigator.geolocation.getCurrentPosition(geo_success, geo_error, geo_options);
+  //}, 1000);
 })
 
 //-----------------geo function---------------
@@ -178,12 +179,15 @@ var geo_options = {
 };
 
 var last_timestamp = 0;
+var latitude_return, longitude_return;
 function geo_success(position) {
   if(position.timestamp !== last_timestamp){
     // console.log('y');
     $('#gps-signal').attr('src', '../../static/file/gps-y.png')
     last_timestamp = position.timestamp;
     console.log(position);
+    latitude_return = position.coords.latitude; //this variable store for returning to server.js by ajax
+    longitude_return = position.coords.longitude; //this variable store for returning to server.js by ajax
     var a = document.getElementById('geoinfo');
     latitude = Number((position.coords.latitude).toFixed(3)).toString();
     longitude = Number((position.coords.longitude).toFixed(3)).toString();
