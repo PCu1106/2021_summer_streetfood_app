@@ -81,7 +81,7 @@ $(document).ready(function(){
       $("#shoot-again-btn").hide();
       $("#goto-list-btn").hide();
       $("#restaurant-list").hide();
-      console.log('hide')
+      // console.log('hide')
     }, 1000); 
     cameraOutput.style.display = "none";
     cameraStart();
@@ -124,7 +124,8 @@ $(document).ready(function(){
   //-----------------cam action---------------
   $("#shoot-btn").click(function(){
     cameraSnapshot();
-    navigator.geolocation.getCurrentPosition(geo_success, geo_error, geo_options);
+    // navigator.geolocation.getCurrentPosition(geo_success, geo_error, geo_options);
+    console.log(latitude_return, longitude_return)
     cameraStop();
     $("#shoot-btn").hide();
     $("#shoot-again-btn").show();
@@ -164,11 +165,12 @@ $(document).ready(function(){
       }
     });
   });
+
   //check gps signal each 10 sec and show with icon
   nonew = 0
-  //let intervalId = window.setInterval(function(){
-  //  navigator.geolocation.getCurrentPosition(geo_success, geo_error, geo_options);
-  //}, 1000);
+  let intervalId = window.setInterval(function(){
+   navigator.geolocation.getCurrentPosition(geo_success, geo_error, geo_options);
+  }, 1000);
 })
 
 //-----------------geo function---------------
@@ -185,7 +187,7 @@ function geo_success(position) {
     // console.log('y');
     $('#gps-signal').attr('src', '../../static/file/gps-y.png')
     last_timestamp = position.timestamp;
-    console.log(position);
+    // console.log(position);
     latitude_return = position.coords.latitude; //this variable store for returning to server.js by ajax
     longitude_return = position.coords.longitude; //this variable store for returning to server.js by ajax
     var a = document.getElementById('geoinfo');
@@ -195,7 +197,7 @@ function geo_success(position) {
     nonew = 0
   }
   else{
-    console.log('no new geo info')
+    // console.log('no new geo info')
     // console.log(nonew)
     nonew += 1
     if (nonew > 5){
