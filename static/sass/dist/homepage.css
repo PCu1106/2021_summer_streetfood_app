@@ -21,15 +21,21 @@
   width: 100%;
   height: 100%;
 }
-.container .title {
+.container #title {
   position: absolute;
   top: 25%;
   left: 18%;
   font-size: 13rem;
-  font-color: black;
   width: 50%;
   line-height: 10rem;
   color: white;
+}
+.container .title {
+  font-size: 5rem;
+  margin-bottom: 1rem;
+  color: white;
+  margin-top: 2rem;
+  align: center;
 }
 .container .exit-btn {
   position: fixed;
@@ -61,6 +67,15 @@
 #home-container {
   display: block;
   background-color: var(--bg-color-1);
+}
+#home-container .title {
+  position: absolute;
+  top: 25%;
+  left: 18%;
+  font-size: 13rem;
+  width: 50%;
+  line-height: 10rem;
+  color: white;
 }
 #home-container #btn-group {
   position: fixed;
@@ -282,7 +297,8 @@
   color: #D56A16;
 }
 .list .shop-item .command, .list .shop-item .phone-number, .list .shop-item .business-hours {
-  font-size: 1.5rem;
+  font-size: 2.5rem;
+  text-size-adjust: none;
   margin-left: 2rem;
 }
 .list .shop-item .control_btn {

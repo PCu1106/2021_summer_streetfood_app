@@ -12,10 +12,6 @@
 
   --main-btnsize: 15rem
 
-
-
-
-
 .container
   position: fixed
   background-color: var(--bg-color-1)
@@ -24,16 +20,22 @@
   width: 100%
   height: 100%
 
-  .title
+  // main title
+  #title
     position: absolute
     top: 25%
     left: 18%
     font-size: 13rem
-    font-color: black
     width: 50%
     line-height: 10rem
     color: white
 
+  .title
+    font-size: 5rem
+    margin-bottom: 1rem
+    color: white
+    margin-top: 2rem
+    align: center
   .exit-btn
     position: fixed
     height: 5rem
@@ -63,6 +65,15 @@
 #home-container
   display: block
   background-color: var(--bg-color-1)
+
+  .title
+    position: absolute
+    top: 25%
+    left: 18%
+    font-size: 13rem
+    width: 50%
+    line-height: 10rem
+    color: white
 
   #btn-group
     position: fixed
@@ -248,7 +259,6 @@
     background-color: #DAE1F2
     margin-bottom: 2.5rem
     padding: 1rem 2rem
-
     .shop-name
       font-size: 3rem
       font-weight: 900
@@ -265,12 +275,10 @@
       color: #ddd
       overflow: hidden
       font-size: 2.5rem
-    
       text-shadow: 0px 1px 0 #999
 
       .full_star
         width: 75%
-
         position: absolute
         left: 0
         top: 0
@@ -279,7 +287,8 @@
         color: #D56A16
 
     .command, .phone-number, .business-hours
-      font-size: 1.5rem
+      font-size: 2.5rem
+      text-size-adjust: none
       margin-left: 2rem
 
     .control_btn
