@@ -178,7 +178,7 @@ app.post('/list', (req, res) =>{
     console.log(`type is : ${typeof message}`);
     console.log(message);
     // message內容為 b'["\uXXXX\uXXXX..\uXXXX","\u...\u"]' 型態為string
-    // 用正規表示式對 \uXXXX (UTF-16編碼)做decode
+    // 用正規表示式對 \uXXXX (Unicode)做decode
     let tmp = message.replace( /\\u([a-fA-F0-9]{4})/g, function(g, m1) {
       return String.fromCharCode(parseInt(m1, 16));
     })

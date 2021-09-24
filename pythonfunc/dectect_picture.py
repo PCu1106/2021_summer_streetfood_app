@@ -125,7 +125,7 @@ def FLANN_Matching(img_base64, tr_name_list ,tr_desc_list):
                     #print("Correctance: ",len(matchesMask)/len(matches),"; Current_max_index: ",max_tmp_index)
                 
 
-                if (len(matches)!=0 and (len(matchesMask)>= max_tmp or (len(matchesMask)>= 30)) ):
+                if (len(matches)!=0 and (len(matchesMask)> max_tmp or len(matchesMask)>= 30) ) and len(matchesMask)>=20:
 
                     #max_tmp_2d=[]#用2維陣列 [x,y]，才能丟入kmeans()
 
@@ -152,8 +152,8 @@ def FLANN_Matching(img_base64, tr_name_list ,tr_desc_list):
 
       max_tmp_correct_index=[]
       length=(len(max_tmp_index_list))       
-      # 強制回傳一個結果
-      #max_tmp_correct_index.append(max_tmp_index_list[length-1]) 
+      # 至少回傳一個結果
+      max_tmp_correct_index.append(max_tmp_index_list[length-1]) 
       #max_tmp_correct_index.append(max_tmp_index_list[length-2]) 
 
         
