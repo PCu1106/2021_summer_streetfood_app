@@ -30,16 +30,17 @@ form#register {
 }
 .container .title {
   position: absolute;
-  top: 10%;
-  left: 10%;
-  font-size: 10rem;
+  top: 25%;
+  left: 18%;
+  font-size: 13rem;
+  font-color: black;
   width: 50%;
   line-height: 10rem;
   color: white;
 }
 .container .input-container {
   position: absolute;
-  top: 38%;
+  top: 48%;
   left: 10%;
   font-size: 3rem;
   font-color: black;

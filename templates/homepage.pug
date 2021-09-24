@@ -14,7 +14,7 @@ html
       img#gps-signal(src='../../static/file/gps-n.png')
 
     #home-container.container
-      #title Food cam
+      .title Food cam
       #btn-group
         #camera-btn.btns
           img#camera-icon(src='../../static/file/camera.png')
@@ -49,9 +49,10 @@ html
           p.command 1825則評論
           a.phone-number(href='tel:062365768') 電話:06-2365768
           p.business-hours 營業時間:11:00-21:00
-          .small-block 電話
-          .small-block 網站
-          .small-block 儲存
+          .control_btn
+            .small-block 電話
+            .small-block 網站
+            .small-block 儲存
 
         .shop-item
           p.shop-name(align='center') 大夯牛排館 Da-hang Steak house
@@ -62,9 +63,10 @@ html
           p.command 1825則評論
           p.phone-number 電話:06-2365768
           p.business-hours 營業時間:11:00-21:00
-          .small-block 電話
-          .small-block 網站
-          .small-block 儲存
+          .control_btn
+            .small-block 電話
+            .small-block 網站
+            .small-block 儲存
       script.
         //- if(navigator.geolocation) {
         //-   navigator.geolocation.getCurrentPosition(function(position){

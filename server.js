@@ -62,6 +62,8 @@ app.listen(port, "127.0.0.1", () => {
 //   console.log('Server is running on ' + port + ' port...');
 // });
 //-------------------------------------------------------------------------------
+
+
 var sqlite3 = require('sqlite3').verbose()
 
 function sql_fav() {
@@ -110,12 +112,41 @@ function render(filename, callback) {
     await wait(200);
     for (var key in params) {
       //console.log('params[' + key  + ']' + params[key]);
-      block = '<div class="shop-item"><p class="shop-name" align="center">' + params[key] + '</p><p class="score">4.4</p><div class="ratings"><div class="empty_star">★★★★★</div><div class="full_star">★★★★★</div></div><p class="command">1825則評論</p><p class="phone-number">電話:06-2365768</p><p class="business-hours">營業時間:11:00-21:00</p><div class="small-block">電話</div><div class="small-block">網站</div><button onclick="save(this);" class="save-btn" value="' + paramsid[key] + '">儲存</button></div>';
+      block = '<div class="shop-item">\
+                <p class="shop-name" align="center">' + params[key] + '</p>\
+                <p class="score">4.4</p>\
+                <div class="ratings">\
+                  <div class="empty_star">★★★★★</div>\
+                  <div class="full_star">★★★★★</div>\
+                </div>\
+                <p class="command">1825則評論</p>\
+                <a class="phone-number" href="tel:06-2365768">電話:06-2365768</a>\
+                <p class="business-hours">營業時間:11:00-21:00</p>\
+                <div class="control_btn">\
+                  <button class="small-block">電話</button>\
+                  <button class="small-block">網站</button>\
+                  <button onclick="save(this);" class="save-btn" value="'+ paramsid[key] + '">儲存</button>\
+                </div>\
+              </div>';
       data = data.replace('<!-- {' + key  + '} -->', block);
     }
     for (var key in params_fav) {
       //console.log('params_fav[' + key  + ']' + params_fav[key]);
-      block = '<div class="shop-item"><p class="shop-name" align="center">' + params_fav[key] + '</p><p class="score">4.4</p><div class="ratings"><div class="empty_star">★★★★★</div><div class="full_star">★★★★★</div></div><p class="command">1825則評論</p><p class="phone-number">電話:06-2365768</p><p class="business-hours">營業時間:11:00-21:00</p><div class="small-block">電話</div><div class="small-block">網站</div></div>';
+      block = '<div class="shop-item">\
+                <p class="shop-name" align="center">' + params_fav[key] + '</p>\
+                <p class="score">4.4</p>\
+                <div class="ratings">\
+                  <div class="empty_star">★★★★★</div>\
+                  <div class="full_star">★★★★★</div>\
+                </div>\
+                <p class="command">1825則評論</p>\
+                <a class="phone-number" href="tel:06-2365768">電話:06-2365768</a>\
+                <p class="business-hours">營業時間:11:00-21:00</p>\
+                <div class="control_btn">\
+                  <button class="small-block">電話</button>\
+                  <button class="small-block">網站</button>\
+                </div>\
+              </div>';
       data = data.replace('<!-- {' + key  + '} -->', block);
     }
     callback(null, data);
