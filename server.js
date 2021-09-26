@@ -216,8 +216,26 @@ app.post('/list', (req, res) =>{
     //  => array ['飽芝林關東煮', '個別指導明光義塾 台南後甲教室'] 
     const final_list = tmp.substring(1,tmp.length-1).replace(/\"/g,'').split(',');
     console.log(final_list);
+    //寫死的店家資訊，等db整理完再改
+    var score = "4.4";
+    var command = "1825則評論";
+    var phone = "06-2757575";
+    var time = "營業時間:11:00-21:00";
+    var website = "https://foodcam.tk";
+    var result = []; //陣列，每一格儲存一間店的所有資訊
+    for (var i=0; i < final_list.length; i++) {
+      var obj = JSON.stringify ({
+        name: final_list[i],
+        score: score,
+        command: command,
+        phone: phone,
+        time: time,
+        website: website
+      })
+      result.push(obj);
+    }
     // 最後打包成json型態回傳
-    var result = { "name_list" : final_list}
+    console.log(result);
     res.json(result);
   });
   

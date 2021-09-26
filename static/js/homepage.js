@@ -146,19 +146,36 @@ $(document).ready(function(){
     $("#goto-list-btn").hide();
     $("#shoot-again-btn").hide();
     $("#cam-output").hide();
+    //清空restaurant-list
+    var restaurant_list = document.querySelector("#restaurant-list");
+    deleteChild(restaurant_list);
+    //create "商家資訊" title
+    shopinfo_title();
     $("#restaurant-list").show();
     var img = { img_64 : document.getElementById("cam-output").getAttribute("src")};
     // send base64 to server
-    console.log('list');
+    //console.log('list');
     $.ajax({
-      data : { 'img': img, 'latitude': latitude_return, 'longitude': longitude_return },
+      data : img,
+      //data : { 'img': img, 'latitude': latitude_return, 'longitude': longitude_return },
       url : '/list',
       type : 'post',
       dataType : 'json',
       success : function(result){
         // if received data correctly
         // result : [ ]
-        console.log(result.name_list)
+        console.log(result)
+        var length = getJsonLength(result);
+        console.log('length: '+length)
+        if (length == 0) {
+          console.log('查無商家資訊')
+        }
+        else {
+          for (var i=0; i<length; i++) {
+            var obj = JSON.parse(result[i]); //一間店的所有資訊
+            showList(obj,i);
+          }
+        }
       },
       error : function(jqXHR, textStatus, errorThrown){
         alert(jqXHR.textStatus);
@@ -235,3 +252,92 @@ function save(elem) {
       console.log('return: ' + data);
   })
 }
+
+//get json length
+function getJsonLength(jsonData) {
+  var jsonLength = 0;
+  for(var item in jsonData){
+    jsonLength++;
+  }
+  return jsonLength;
+}
+
+//create "商家資訊" title
+function shopinfo_title(){
+  //<h1 class="title" align="center"><b>商家資訊</b></h1>
+  var title = document.createElement('h1');
+  title.setAttribute('class','title');
+  title.setAttribute('id','shopinfo');
+  title.setAttribute('align','center');
+  document.querySelector("#restaurant-list").appendChild(title);
+  var txt = document.createElement('b');
+  txt.textContent = "商家資訊";
+  document.querySelector("#shopinfo").appendChild(txt);
+}
+
+//dynamic show shop-list in homepage.html
+function showList(object,num) {
+  //create new shop-item DOM under $("restaurant-list")
+  //<div class="shop-item" id="shop"+num></div>
+  var shop = document.createElement('div');
+  shop.setAttribute('class','shop-item');
+  shop.setAttribute('id','shop' + num.toString());
+  document.querySelector("#restaurant-list").appendChild(shop);
+  //create new DOMs under shop-item
+  var shop_item = document.querySelector("#shop"+num.toString());
+  //<p class="shop-name" align="center">name</p>
+  var shop_name = document.createElement('p');
+  shop_name.textContent = object.name;
+  shop_name.setAttribute('class','shop-name');
+  shop_name.setAttribute('align','center');
+  shop_item.appendChild(shop_name);
+  //<p class="score">4.4</p>
+  var shop_score = document.createElement('p');
+  shop_score.textContent = object.score;
+  shop_score.setAttribute('class','score');
+  shop_item.appendChild(shop_score);
+  //<div class="ratings"><div class="empty_star">★★★★★</div><div class="full_star">★★★★★</div></div>
+  var shop_ratings = document.createElement('div');
+  shop_ratings.setAttribute('class','ratings');
+  shop_item.appendChild(shop_ratings);
+  var empty_star = document.createElement('div');
+  empty_star.textContent = "★★★★★";
+  empty_star.setAttribute('class','empty_star');
+  shop_ratings.appendChild(empty_star);
+  var full_start = document.createElement('div');
+  full_start.textContent = "★★★★★";
+  full_start.setAttribute('class','full_star')
+  shop_ratings.appendChild(full_start);
+  //<p class="command">1825則評論</p>
+  var shop_command = document.createElement('p');
+  shop_command.textContent = object.command;
+  shop_command.setAttribute('class','command');
+  shop_item.appendChild(shop_command);
+  //<p class="phone-number">電話:06-2365768</p>
+  var shop_phone = document.createElement('p');
+  shop_phone.textContent = object.phone;
+  shop_phone.setAttribute('class','phone-number');
+  shop_item.appendChild(shop_phone);
+  //<p class="business-hours">營業時間:11:00-21:00</p>
+  var shop_time = document.createElement('p');
+  shop_time.textContent = object.time;
+  shop_time.setAttribute('class','business-hours');
+  shop_item.appendChild(shop_time);
+  //<div class="small-block">電話</div>
+  var phone = document.createElement('div');
+  phone.textContent = "電話";
+  shop_item.appendChild(phone);
+  //<div class="small-block">網站</div>
+  var web = document.createElement('div');
+  web.textContent = "網站";
+  shop_item.appendChild(web);
+}
+
+//刪除子元素
+function deleteChild(parent) { 
+  var child = parent.lastElementChild;  
+  while (child) { 
+      parent.removeChild(child); 
+      child = parent.lastElementChild; 
+  } 
+} 
