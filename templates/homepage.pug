@@ -7,7 +7,7 @@ html
     script(src="../../static/js/homepage.js")
     script(src="../../static/js/app.js")
     link(href="../../static/manifest.json", rel="manifest", crossorigin="use-credentials")
-    meta(name="viewport" content="shrink-to-fit=no, maximum-scale=1.0, user-scalable=no")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no")
 
   body
     #status-container
@@ -17,11 +17,11 @@ html
       #title Food cam
       #btn-group
         #camera-btn.btns
-          img#camera-icon(src='../../static/file/camera.png')
+          img#icon(src='../../static/file/camera.png')
         #favorite-btn.btns
-          img#camera-icon(src='../../static/file/favorite.png')
+          img#icon(src='../../static/file/favorite.png')
         #history-btn.btns
-          img#camera-icon(src='../../static/file/history.png')
+          img#icon(src='../../static/file/history.png')
 
     #camera-container.container
       img#camera-exit.exit-btn(src='../../static/file/previous-icon-w.png')
@@ -29,30 +29,14 @@ html
       canvas#cam-sensor
       //- for debug
       div#positioninfo
-        h1 方位
-          span#alpha
-        h1 定位
-          span#geoinfo
+        p#direction
+        p#position
       img#cam-output(src="//:0")(alt="")
       #shoot-btn
       img#shoot-again-btn(src='../../static/file/camera.png')
       img#goto-list-btn(src='../../static/file/list.png')
       #restaurant-list.list
-        h1.title(align='center')
-          b 商家資訊
-        //-#shop-first.shop-item
-        //-  p.shop-name(align='center') 大夯牛排館 Da-hang Steak house
-        //-  p.score 4.4
-        //- .ratings
-        //-    .empty_star ★★★★★
-        //-    .full_star ★★★★★
-        //-  p.command 1825則評論
-        //-  a.phone-number(href='tel:062365768') 電話:06-2365768
-        //-  p.business-hours 營業時間:11:00-21:00
-        //-  .control_btn
-        //-    .small-block 電話
-        //-    .small-block 網站
-        //-    .small-block 儲存
+        p.title(align='center') 商家資訊
       script.
         //- if(navigator.geolocation) {
         //-   navigator.geolocation.getCurrentPosition(function(position){
@@ -66,8 +50,7 @@ html
     #favorite-container.container
       img#favorite-exit.exit-btn(src='../../static/file/cross-icon.png')
       img#history-sw.list-sw(src='../../static/file/history.png')
-      h1.title(align='center')
-        b 我的最愛
+      .title(align='center') 我的最愛
       
       #favorite_list.list
         <!-- {favorite1} -->
@@ -86,8 +69,7 @@ html
     #history-container.container
       img#history-exit.exit-btn(src='../../static/file/cross-icon.png')
       img#favorite-sw.list-sw(src='../../static/file/favorite.png')
-      h1.title(align='center')
-        b 歷史紀錄
+      .title(align='center') 歷史紀錄
       #history_list.list
         <!-- {shopname1} -->
         <!-- {shopname2} -->

@@ -10,7 +10,7 @@
   --bg-cam-btn: #EBF6F7;
   --bg-fav-btn: #BADCAD;
   --bg-his-btn: #FEF263;
-  --main-btnsize: 15rem;
+  --main-btnsize: 6rem;
 }
 
 .container {
@@ -25,22 +25,22 @@
   position: absolute;
   top: 25%;
   left: 18%;
-  font-size: 13rem;
+  font-size: 4rem;
   width: 50%;
-  line-height: 10rem;
+  line-height: 4rem;
   color: white;
 }
 .container .title {
-  font-size: 5rem;
+  font-weight: 700;
+  font-size: 2.2rem;
   margin-bottom: 1rem;
   color: white;
-  margin-top: 2rem;
-  align: center;
+  margin-top: 1rem;
 }
 .container .exit-btn {
   position: fixed;
-  height: 5rem;
-  width: 5rem;
+  height: 2rem;
+  width: 2rem;
   z-index: 3;
   top: 1rem;
   left: 1rem;
@@ -48,6 +48,70 @@
 .container .exit-btn:active {
   transform: scale(0.97);
 }
+.list {
+  position: fixed;
+  transform: translate(-50%, 0);
+  left: 50%;
+  width: 80%;
+  height: 85%;
+  overflow: scroll;
+  border-radius: 2rem;
+}
+.list .shop-item {
+  position: relative;
+  border-radius: 2rem;
+  background-color: #DAE1F2;
+  margin-bottom: 1rem;
+  padding: 1rem 0.5rem;
+}
+.list .shop-item .shop-name {
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+.list .shop-item .score {
+  font-size: 1.2rem;
+  margin-left: 1rem;
+  float: left;
+  line-height: 1.9rem;
+}
+.list .shop-item .ratings {
+  position: relative;
+  display: inline-block;
+  color: #ddd;
+  overflow: hidden;
+  font-size: 1.2rem;
+  text-shadow: 1px 1px 0 #999;
+}
+.list .shop-item .ratings .full_star {
+  width: 75%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  color: #D56A16;
+}
+.list .shop-item .command, .list .shop-item .phone-number, .list .shop-item .business-hours {
+  font-size: 0.9rem;
+  margin-left: 1rem;
+}
+.list .shop-item .control_btn {
+  height: 5rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.list .shop-item .control_btn .small-block, .list .shop-item .control_btn .save-btn {
+  background-color: #94aeeb;
+  font-size: 1rem;
+  border-radius: 1rem;
+  text-align: center;
+  display: inline;
+  padding: 0.5rem;
+}
+
 #status-container {
   position: fixed;
   height: 10%;
@@ -59,9 +123,9 @@
 #status-container #gps-signal {
   position: absolute;
   right: 1rem;
-  top: 1.5rem;
-  height: 5rem;
-  width: 5rem;
+  top: 1rem;
+  height: 2rem;
+  width: 2rem;
 }
 
 #home-container {
@@ -72,64 +136,55 @@
   position: absolute;
   top: 25%;
   left: 18%;
-  font-size: 13rem;
+  font-size: 4rem;
   width: 50%;
-  line-height: 10rem;
+  line-height: 4rem;
   color: white;
 }
 #home-container #btn-group {
   position: fixed;
   transform: translate(-50%, -50%);
-  top: 63%;
+  top: 60%;
   left: 50%;
   width: calc(var(--main-btnsize) * 1.5 + 14rem + 2rem);
-  height: calc(var(--main-btnsize) + 10rem);
+  height: calc(var(--main-btnsize) + 5rem);
 }
 #home-container #btn-group .btns:active {
   transform: scale(0.98);
 }
 #home-container #btn-group .btns {
   position: absolute;
-  font-size: 6rem;
+}
+#home-container #btn-group #camera-btn #icon, #home-container #btn-group #favorite-btn #icon, #home-container #btn-group #history-btn #icon {
+  height: 100%;
+  width: 100%;
 }
 #home-container #btn-group #camera-btn {
   background-color: var(--bg-cam-btn);
-  top: 0;
-  left: 0;
   height: var(--main-btnsize);
   width: var(--main-btnsize);
-  padding: 5rem;
+  top: 0;
+  left: 4rem;
+  padding: 2.5rem;
   border-radius: 2rem;
-}
-#home-container #btn-group #camera-btn #camera-icon {
-  height: 100%;
-  width: 100%;
 }
 #home-container #btn-group #favorite-btn {
   background-color: var(--bg-fav-btn);
-  top: 0%;
-  right: 0%;
   height: calc(var(--main-btnsize) / 2);
   width: calc(var(--main-btnsize) / 2);
-  padding: 2rem;
-  border-radius: 2rem;
-}
-#home-container #btn-group #favorite-btn #camera-icon {
-  height: 100%;
-  width: 100%;
+  top: 0%;
+  right: 4rem;
+  padding: 1rem;
+  border-radius: 1rem;
 }
 #home-container #btn-group #history-btn {
   background-color: var(--bg-his-btn);
-  bottom: 0%;
-  right: 0%;
   height: calc(var(--main-btnsize) / 2);
   width: calc(var(--main-btnsize) / 2);
-  padding: 2rem 2.5rem 2rem 1.5rem;
-  border-radius: 2rem;
-}
-#home-container #btn-group #history-btn #camera-icon {
-  height: 100%;
-  width: 100%;
+  bottom: 0;
+  right: 4rem;
+  padding: 1rem 1.25rem 1rem 0.75rem;
+  border-radius: 1rem;
 }
 
 #camera-container {
@@ -138,12 +193,12 @@
 #camera-container #positioninfo {
   position: fixed;
   top: 0.5rem;
-  left: 8rem;
-  font-size: 1.5rem;
+  left: 3rem;
+  font-size: 1rem;
 }
 #camera-container #camera-exit {
-  top: 2rem;
-  left: 2rem;
+  top: 1rem;
+  left: 1rem;
 }
 #camera-container #cam-window {
   display: block;
@@ -183,12 +238,12 @@
   background-color: white;
   position: absolute;
   transform: translate(-50%, 0%);
-  height: 8rem;
-  width: 8rem;
+  height: 3rem;
+  width: 3rem;
   border-radius: 50%;
-  bottom: 3rem;
+  bottom: 1.5rem;
   left: 50%;
-  border: solid #BBB 1rem;
+  border: solid #BBB 0.4rem;
 }
 #camera-container #shoot-btn .taken {
   height: 100px !important;
@@ -202,28 +257,26 @@
   transform: scale(0.9);
 }
 #camera-container #shoot-again-btn {
-  display: block;
   background-color: white;
   position: absolute;
-  height: 8rem;
-  width: 8rem;
-  padding: 1rem;
-  border-radius: 2rem;
-  bottom: 3.5rem;
+  height: 3rem;
+  width: 3rem;
+  padding: 0.6rem;
+  border-radius: 1rem;
+  bottom: 1rem;
   left: 21%;
 }
 #camera-container #goto-list-btn:active {
   transform: scale(0.9);
 }
 #camera-container #goto-list-btn {
-  display: block;
   background-color: white;
   position: absolute;
-  height: 8rem;
-  width: 8rem;
-  padding: 1rem;
-  border-radius: 2rem;
-  bottom: 3.5rem;
+  height: 3rem;
+  width: 3rem;
+  padding: 0.6rem;
+  border-radius: 1rem;
+  bottom: 1rem;
   right: 21%;
 }
 #favorite-container {
@@ -236,13 +289,13 @@
 
 .list-sw {
   position: fixed;
-  right: 3rem;
-  bottom: 3rem;
-  height: 7rem;
-  width: 7rem;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  height: 2rem;
+  width: 2rem;
   z-index: 1;
-  padding: 1rem;
-  border-radius: 1.5rem;
+  padding: 0.5rem;
+  border-radius: 0.7rem;
 }
 
 #history-sw {
@@ -251,69 +304,4 @@
 
 #favorite-sw {
   background-color: var(--bg-fav-btn);
-}
-
-.list {
-  position: fixed;
-  transform: translate(-50%, 0);
-  left: 50%;
-  width: 80%;
-  height: 85%;
-  overflow: scroll;
-  border-radius: 2rem;
-}
-.list .shop-item {
-  position: relative;
-  border-radius: 3rem;
-  background-color: #DAE1F2;
-  margin-bottom: 2.5rem;
-  padding: 1rem 2rem;
-}
-.list .shop-item .shop-name {
-  font-size: 3rem;
-  font-weight: 900;
-}
-.list .shop-item .score {
-  font-size: 3rem;
-  margin-left: 30px;
-  float: left;
-  line-height: 3.5rem;
-}
-.list .shop-item .ratings {
-  position: relative;
-  display: inline-block;
-  color: #ddd;
-  overflow: hidden;
-  font-size: 2.5rem;
-  text-shadow: 0px 1px 0 #999;
-}
-.list .shop-item .ratings .full_star {
-  width: 75%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  color: #D56A16;
-}
-.list .shop-item .command, .list .shop-item .phone-number, .list .shop-item .business-hours {
-  font-size: 2.5rem;
-  text-size-adjust: none;
-  margin-left: 2rem;
-}
-.list .shop-item .control_btn {
-  height: 5rem;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-evenly;
-  align-items: center;
-}
-.list .shop-item .control_btn .small-block, .list .shop-item .control_btn .save-btn {
-  background-color: #94aeeb;
-  font-size: 2rem;
-  border-radius: 1rem;
-  text-align: center;
-  display: inline;
-  padding: 0.5rem;
 }

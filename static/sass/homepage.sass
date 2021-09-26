@@ -10,7 +10,7 @@
   --bg-fav-btn: #BADCAD
   --bg-his-btn: #FEF263
 
-  --main-btnsize: 15rem
+  --main-btnsize: 6rem
 
 .container
   position: fixed
@@ -25,21 +25,21 @@
     position: absolute
     top: 25%
     left: 18%
-    font-size: 13rem
+    font-size: 4rem
     width: 50%
-    line-height: 10rem
+    line-height: 4rem
     color: white
 
   .title
-    font-size: 5rem
+    font-weight: 700
+    font-size: 2.2rem
     margin-bottom: 1rem
     color: white
-    margin-top: 2rem
-    align: center
+    margin-top: 1rem
   .exit-btn
     position: fixed
-    height: 5rem
-    width: 5rem
+    height: 2rem
+    width: 2rem
     z-index: 3
     top: 1rem
     left: 1rem
@@ -47,6 +47,68 @@
   .exit-btn:active
     transform: scale(0.97)
   .list-sw
+
+.list
+  position: fixed
+  transform: translate(-50%, 0)
+  left: 50%
+  width: 80%
+  height: 85%
+  overflow: scroll
+  border-radius: 2rem
+
+  .shop-item
+    position: relative
+    border-radius: 2rem
+    background-color: #DAE1F2
+    margin-bottom: 1rem
+    padding: 1rem 0.5rem
+    .shop-name
+      font-size: 1.5rem
+      font-weight: 900
+
+    .score
+      font-size: 1.2rem
+      margin-left: 1rem
+      float: left
+      line-height: 1.9rem
+
+    .ratings
+      position: relative
+      display: inline-block
+      color: #ddd
+      overflow: hidden
+      font-size: 1.2rem
+      text-shadow: 1px 1px 0 #999
+
+      .full_star
+        width: 75%
+        position: absolute
+        left: 0
+        top: 0
+        white-space: nowrap
+        overflow: hidden
+        color: #D56A16
+
+    .command, .phone-number, .business-hours
+      font-size: 0.9rem
+      margin-left: 1rem
+
+    .control_btn
+      height: 5rem
+      display: flex
+      flex-direction: row
+      flex-wrap: nowrap
+      justify-content: space-evenly
+      align-items: center
+
+      .small-block, .save-btn
+        background-color: #94aeeb
+        font-size: 1rem
+        border-radius: 1rem
+        text-align: center
+        display: inline
+        padding: 0.5rem
 
 #status-container
   position: fixed
@@ -58,9 +120,9 @@
   #gps-signal
     position: absolute
     right: 1rem
-    top: 1.5rem
-    height: 5rem
-    width: 5rem
+    top: 1rem
+    height: 2rem
+    width: 2rem
 
 #home-container
   display: block
@@ -70,62 +132,57 @@
     position: absolute
     top: 25%
     left: 18%
-    font-size: 13rem
+    font-size: 4rem
     width: 50%
-    line-height: 10rem
+    line-height: 4rem
     color: white
 
   #btn-group
     position: fixed
     transform: translate(-50%, -50%)
-    top: 63%
+    top: 60%
     left: 50%
     width: calc(var(--main-btnsize) * 1.5 + 14rem + 2rem)
-    height: calc(var(--main-btnsize) + 10rem)
+    height: calc(var(--main-btnsize) + 5rem)
 
     .btns:active
       transform: scale(0.98)
 
     .btns
       position: absolute
-      font-size: 6rem
-    #camera-btn
-      background-color: var(--bg-cam-btn)
-      top: 0
-      left: 0
-      height: var(--main-btnsize)
-      width: var(--main-btnsize)
-      padding: 5rem
-      border-radius: 2rem
-      #camera-icon
+    
+    #camera-btn, #favorite-btn, #history-btn
+      //transform: translate(-100%, 0%)
+      #icon
         height: 100%
         width: 100%
+        
+    #camera-btn
+      background-color: var(--bg-cam-btn)
+      height: var(--main-btnsize)
+      width: var(--main-btnsize)
+      top: 0
+      left: 4rem
+      padding: 2.5rem
+      border-radius: 2rem
 
     #favorite-btn
       background-color: var(--bg-fav-btn)
-      top: 0%
-      right: 0%
       height: calc(var(--main-btnsize) / 2)
       width: calc(var(--main-btnsize) / 2)
-      //transform: translate(-100%, 0%)
-      padding: 2rem
-      border-radius: 2rem
-      #camera-icon
-        height: 100%
-        width: 100%
+      top: 0%
+      right: 4rem
+      padding: 1rem
+      border-radius: 1rem
 
     #history-btn
       background-color: var(--bg-his-btn)
-      bottom: 0%
-      right: 0%
       height: calc(var(--main-btnsize) / 2)
       width: calc(var(--main-btnsize) / 2)
-      padding: 2rem 2.5rem 2rem 1.5rem
-      border-radius: 2rem
-      #camera-icon
-        height: 100%
-        width: 100%
-
+      bottom: 0
+      right: 4rem
+      padding: 1rem 1.25rem 1rem 0.75rem
+      border-radius: 1rem
 
 #camera-container
   display: none
@@ -133,11 +190,11 @@
   #positioninfo
     position: fixed
     top: 0.5rem
-    left: 8rem
-    font-size: 1.5rem
+    left: 3rem
+    font-size: 1rem
   #camera-exit
-    top: 2rem
-    left: 2rem
+    top: 1rem
+    left: 1rem
 
   #cam-window 
     display: block
@@ -176,12 +233,12 @@
     background-color: white
     position: absolute
     transform: translate(-50%, 0%)
-    height: 8rem
-    width: 8rem
+    height: 3rem
+    width: 3rem
     border-radius: 50%
-    bottom: 3rem
+    bottom: 1.5rem
     left: 50%
-    border: solid #BBB 1rem
+    border: solid #BBB 0.4rem
     .taken
       height: 100px!important
       width: 100px!important
@@ -193,27 +250,25 @@
   #shoot-again-btn:active
     transform: scale(0.9)
   #shoot-again-btn
-    display: block
     background-color: white
     position: absolute
-    height: 8rem
-    width: 8rem
-    padding: 1rem
-    border-radius: 2rem
-    bottom: 3.5rem
+    height: 3rem
+    width: 3rem
+    padding: 0.6rem
+    border-radius: 1rem
+    bottom: 1rem
     left: 21%
   
   #goto-list-btn:active
     transform: scale(0.9)
   #goto-list-btn
-    display: block
     background-color: white
     position: absolute
-    height: 8rem
-    width: 8rem
-    padding: 1rem
-    border-radius: 2rem
-    bottom: 3.5rem
+    height: 3rem
+    width: 3rem
+    padding: 0.6rem
+    border-radius: 1rem
+    bottom: 1rem
     right: 21%
 
   #restaurant-list.list 
@@ -231,78 +286,15 @@
 
 .list-sw
   position: fixed
-  right: 3rem
-  bottom: 3rem
-  height: 7rem
-  width: 7rem
+  right: 1.5rem
+  bottom: 1.5rem
+  height: 2rem
+  width: 2rem
   z-index: 1
-  padding: 1rem
-  border-radius: 1.5rem
+  padding: 0.5rem
+  border-radius: 0.7rem
 
 #history-sw
   background-color: var(--bg-his-btn)
 #favorite-sw
   background-color: var(--bg-fav-btn)
-
-.list
-  position: fixed
-  transform: translate(-50%, 0)
-  left: 50%
-  width: 80%
-  height: 85%
-  overflow: scroll
-  border-radius: 2rem
-
-  .shop-item
-    position: relative
-    border-radius: 3rem
-    background-color: #DAE1F2
-    margin-bottom: 2.5rem
-    padding: 1rem 2rem
-    .shop-name
-      font-size: 3rem
-      font-weight: 900
-
-    .score
-      font-size: 3rem
-      margin-left: 30px
-      float: left
-      line-height: 3.5rem
-
-    .ratings
-      position: relative
-      display: inline-block
-      color: #ddd
-      overflow: hidden
-      font-size: 2.5rem
-      text-shadow: 0px 1px 0 #999
-
-      .full_star
-        width: 75%
-        position: absolute
-        left: 0
-        top: 0
-        white-space: nowrap
-        overflow: hidden
-        color: #D56A16
-
-    .command, .phone-number, .business-hours
-      font-size: 2.5rem
-      text-size-adjust: none
-      margin-left: 2rem
-
-    .control_btn
-      height: 5rem
-      display: flex
-      flex-direction: row
-      flex-wrap: nowrap
-      justify-content: space-evenly
-      align-items: center
-
-      .small-block, .save-btn
-        background-color: #94aeeb
-        font-size: 2rem
-        border-radius: 1rem
-        text-align: center
-        display: inline
-        padding: 0.5rem
