@@ -121,18 +121,20 @@ function render(filename, callback) {
     await wait(500);
     for (var key in paramname) {
       block = '<div class="shop-item">\
-              <p class="shop-name" align="center">' + paramname[key] + '</p>\
-              <p class="score">' + paramsrating[key] + '</p>\
-              <div class="ratings">\
-              <div class="empty_star">★★★★★</div>\
-              <div class="full_star">★★★★★</div>\
-              </div>\
-              <p class="command">' + paramscomment[key] + '則評論</p>\
-              <p class="phone-number">電話:' + paramsnumber[key] + '</p>\
-              <p class="business-hours">營業時間:11:00-21:00</p>\
-              <div class="small-block">電話</div>\
-              <div class="small-block">網站</div>\
-              <button onclick="save(this);" class="save-btn" value="' + paramsid[key] + '">儲存</button>\
+                <p class="shop-name" align="center">' + paramname[key] + '</p>\
+                <p class="score">' + paramsrating[key] + '</p>\
+                <div class="ratings">\
+                <div class="empty_star">★★★★★</div>\
+                <div class="full_star">★★★★★</div>\
+                </div>\
+                <p class="command">' + paramscomment[key] + '則評論</p>\
+                <p class="phone-number">電話:' + paramsnumber[key] + '</p>\
+                <p class="business-hours">營業時間:11:00-21:00</p>\
+                <div class="control_btn">\
+                  <div class="small-block">電話</div>\
+                  <div class="small-block">網站</div>\
+                  <button onclick="save(this);" class="save-btn" value="' + paramsid[key] + '">儲存</button>\
+                </div>\
               </div>';
       data = data.replace('<!-- {shopname' + key  + '} -->', block);
     }
@@ -140,17 +142,19 @@ function render(filename, callback) {
       console.log('params_fav[' + key_fav  + ']' + params_fav[key_fav]);
       var key = params_fav[key_fav];
       block = '<div class="shop-item">\
-              <p class="shop-name" align="center">' + paramname[key] + '</p>\
-              <p class="score">' + paramsrating[key] + '</p>\
-              <div class="ratings">\
-              <div class="empty_star">★★★★★</div>\
-              <div class="full_star">★★★★★</div>\
-              </div>\
-              <p class="command">' + paramscomment[key] + '</p>\
-              <p class="phone-number">電話:' + paramsnumber[key] + '</p>\
-              <p class="business-hours">營業時間:11:00-21:00</p>\
-              <div class="small-block">電話</div>\
-              <div class="small-block">網站</div>\
+                <p class="shop-name" align="center">' + paramname[key] + '</p>\
+                <p class="score">' + paramsrating[key] + '</p>\
+                <div class="ratings">\
+                <div class="empty_star">★★★★★</div>\
+                <div class="full_star">★★★★★</div>\
+                </div>\
+                <p class="command">' + paramscomment[key] + '</p>\
+                <p class="phone-number">電話:' + paramsnumber[key] + '</p>\
+                <p class="business-hours">營業時間:11:00-21:00</p>\
+                <div class="control_btn">\
+                  <div class="small-block">電話</div>\
+                  <div class="small-block">網站</div>\
+                </div>\
               </div>';
       data = data.replace('<!-- {favorite' + key  + '} -->', block);
     }
