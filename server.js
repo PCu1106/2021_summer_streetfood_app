@@ -2,7 +2,7 @@ var fs = require('fs');
 var https = require('https');
 var path = require('path');
 var express = require('express');
-var file = "test.db";
+var file = "shopdata.db";
 let {PythonShell} = require('python-shell')
 
 //-----run these code when you are on server---------
@@ -67,13 +67,13 @@ var userid = "01";
 
 function sql_fav() {
   var db = new sqlite3.Database(file);
-  var sqlselect = "SELECT * FROM table3 as a INNER JOIN history_" + userid + " as b ON a.ID = b.shopID AND b.favorite == 1;";
+  var sqlselect = "SELECT * FROM shop as a INNER JOIN history_" + userid + " as b ON a.ID = b.shopID AND b.favorite == 1;";
   var x = 1;
   var param = {};
   db.each(sqlselect, function(err, row) {
-    console.log("favorite " + row.ID + ": " + row.NAME);
+    //console.log("favorite " + row.ID + ": " + row.NAME);
     var key = 'favorite' + x;
-    param[key] = row.NAME.toString();
+    param[key] = row.name.toString();
     x++;
   });
   db.close();
@@ -82,14 +82,14 @@ function sql_fav() {
 
 function sql() {
   var db = new sqlite3.Database(file);
-  var sqlselect = "SELECT * FROM table3 as a INNER JOIN history_" + userid + " as b ON a.ID = b.shopID;";
+  var sqlselect = "SELECT * FROM shop as a INNER JOIN history_" + userid + " as b ON a.ID = b.shopID;";
   var x = 1;
   var param = {};
   console.log(userid);
   db.each(sqlselect, function(err, row) {
     //console.log(row.ID + ": " + row.NAME);
     var key = 'shopname' + x;
-    param[key] = row.NAME.toString();
+    param[key] = row.name.toString();
     paramsid[key] = row.ID;
     x++;
   });
