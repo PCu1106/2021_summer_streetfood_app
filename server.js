@@ -64,6 +64,12 @@ app.listen(port, "127.0.0.1", () => {
 //-------------------------------------------------------------------------------
 var sqlite3 = require('sqlite3').verbose()
 var userid = "01";
+var paramname = {};
+var paramsid = {};
+var paramsrating = {};
+var paramscomment = {};
+var paramsnumber = {};
+var paramsweb = {};
 
 function sql_fav() {
   var db = new sqlite3.Database(file);
@@ -71,10 +77,14 @@ function sql_fav() {
   var x = 1;
   var param = {};
   db.each(sqlselect, function(err, row) {
-    //console.log("favorite " + row.ID + ": " + row.NAME);
-    var key = 'favorite' + x;
-    param[key] = row.name.toString();
+    for (var key in paramname) {
+      if(paramname[key] == row.name) {
+        param[x] = key;
+        break;
+      }
+    }
     x++;
+    console.log(row.name);
   });
   db.close();
   return param;
@@ -84,67 +94,65 @@ function sql() {
   var db = new sqlite3.Database(file);
   var sqlselect = "SELECT * FROM shop as a INNER JOIN history_" + userid + " as b ON a.ID = b.shopID;";
   var x = 1;
-  var param = {};
   console.log(userid);
   db.each(sqlselect, function(err, row) {
     //console.log(row.ID + ": " + row.NAME);
-    var key = 'shopname' + x;
-    param[key] = row.name.toString();
-    paramsid[key] = row.ID;
+    paramname[x] = row.name.toString();
+    paramsid[x] = row.ID;
+    paramsrating[x] = row.rating;
+    paramscomment[x] = row.comment;
+    paramsnumber[x] = row.number;
+    paramsweb[x] = row.web;
     x++;
   });
   db.close();
-  console.log(param);
-  return param;
 }
 
 function wait(ms) {
   return new Promise(resolve =>setTimeout(() =>resolve(), ms));
 };
 
-var paramsid = {};
 function render(filename, callback) {
   fs.readFile(filename, 'utf8', async function (err, data) {
     if (err) return callback(err);
-    var params = {};
     var params_fav = {};
-    params = sql();
+    sql();
     params_fav = sql_fav();
     await wait(500);
-    for (var key in params) {
-      console.log('params[' + key  + ']' + params[key]);
+    for (var key in paramname) {
       block = '<div class="shop-item">\
-              <p class="shop-name" align="center">' + params[key] + '</p>\
-              <p class="score">4.4</p>\
+              <p class="shop-name" align="center">' + paramname[key] + '</p>\
+              <p class="score">' + paramsrating[key] + '</p>\
               <div class="ratings">\
               <div class="empty_star">★★★★★</div>\
               <div class="full_star">★★★★★</div>\
               </div>\
-              <p class="command">1825則評論</p>\
-              <p class="phone-number">電話:06-2365768</p>\
+              <p class="command">' + paramscomment[key] + '則評論</p>\
+              <p class="phone-number">電話:' + paramsnumber[key] + '</p>\
               <p class="business-hours">營業時間:11:00-21:00</p>\
               <div class="small-block">電話</div>\
               <div class="small-block">網站</div>\
               <button onclick="save(this);" class="save-btn" value="' + paramsid[key] + '">儲存</button>\
               </div>';
-      data = data.replace('<!-- {' + key  + '} -->', block);
+      data = data.replace('<!-- {shopname' + key  + '} -->', block);
     }
-    for (var key in params_fav) {
-      console.log('params_fav[' + key  + ']' + params_fav[key]);
+    for (var key_fav in params_fav) {
+      console.log('params_fav[' + key_fav  + ']' + params_fav[key_fav]);
+      var key = params_fav[key_fav];
       block = '<div class="shop-item">\
-              <p class="shop-name" align="center">' + params_fav[key] + '</p>\
-              <p class="score">4.4</p>\
+              <p class="shop-name" align="center">' + paramname[key] + '</p>\
+              <p class="score">' + paramsrating[key] + '</p>\
               <div class="ratings">\
               <div class="empty_star">★★★★★</div>\
               <div class="full_star">★★★★★</div>\
               </div>\
-              <p class="command">1825則評論</p>\
-              <p class="phone-number">電話:06-2365768</p>\
+              <p class="command">' + paramscomment[key] + '</p>\
+              <p class="phone-number">電話:' + paramsnumber[key] + '</p>\
               <p class="business-hours">營業時間:11:00-21:00</p>\
               <div class="small-block">電話</div>\
               <div class="small-block">網站</div>\
               </div>';
-      data = data.replace('<!-- {' + key  + '} -->', block);
+      data = data.replace('<!-- {favorite' + key  + '} -->', block);
     }
     callback(null, data);
   });
