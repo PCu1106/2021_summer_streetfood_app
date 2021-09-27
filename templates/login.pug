@@ -2,14 +2,17 @@ doctype htmls
 head
     title livefood
     meta(charset='UTF-8')
-    meta(name="theme-color" content="#44617B")
-    //- link(href="../../static/sass/dist/homepage.css",rel="stylesheet",type="text/css")
+    link(href="../../static/sass/dist/homepage.css",rel="stylesheet",type="text/css")
     link(href="../../static/sass/dist/login.css",rel="stylesheet",type="text/css")
+
+    script(src="../../static/js/homepage.js")
+    link(href="../../static/manifest.json", rel="manifest", crossorigin="use-credentials")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no")
     
-    script(src="https://code.jquery.com/jquery-3.6.0.min.js")
 body
     .container
-        .title Food cam
+        #title Food cam
         form#login 
             .input-container 
                 label(for="username") 帳號 
@@ -19,20 +22,25 @@ body
                 label(for="password") 密碼
                 br
                 input(type="password" name="password") 
-                #signin-output
+                p.signalert#signin-output
             button(class="reg" type='submit') 註冊
             button(class="log" type='submit') 登入
+            button(class="home" type='submit') 先不登入
         form#register
             .input-container
                 label(for="re_username") 帳號 
+                br
                 input(type="text" name="re_username")
                 br
                 label(for="re_password") 密碼
+                br
                 input(type="password" name="re_password") 
                 br
                 label(for="re_passwordagain") 確認密碼
+                br
                 input(type="password" name="re_passwordagain") 
                 br
-                #register-output
+                p.signalert#register-output
+            button(class="log" type='submit') 登入
             button(class="create" type='submit') 確定
     script(src='../../static/js/login.js')

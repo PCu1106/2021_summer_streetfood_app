@@ -2,34 +2,39 @@
 <head>
   <title>livefood</title>
   <meta charset="UTF-8"/>
-  <meta name="theme-color" content="#44617B"/>
+  <link href="../../static/sass/dist/homepage.css" rel="stylesheet" type="text/css"/>
   <link href="../../static/sass/dist/login.css" rel="stylesheet" type="text/css"/>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="../../static/js/homepage.js"></script>
+  <link href="../../static/manifest.json" rel="manifest" crossorigin="use-credentials"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
 </head>
 <body>
   <div class="container">
-    <div class="title">Food cam</div>
+    <div id="title">Food cam</div>
     <form id="login"> 
       <div class="input-container"> 
         <label for="username">帳號 </label><br/>
         <input type="text" name="username"/><br/>
         <label for="password">密碼</label><br/>
         <input type="password" name="password"/>
-        <div id="signin-output"></div>
+        <p class="signalert" id="signin-output"></p>
       </div>
       <button class="reg" type="submit">註冊</button>
       <button class="log" type="submit">登入</button>
+      <button class="home" type="submit">先不登入</button>
     </form>
     <form id="register">
       <div class="input-container">
-        <label for="re_username">帳號 </label>
+        <label for="re_username">帳號 </label><br/>
         <input type="text" name="re_username"/><br/>
-        <label for="re_password">密碼</label>
+        <label for="re_password">密碼</label><br/>
         <input type="password" name="re_password"/><br/>
-        <label for="re_passwordagain">確認密碼</label>
+        <label for="re_passwordagain">確認密碼</label><br/>
         <input type="password" name="re_passwordagain"/><br/>
-        <div id="register-output"></div>
+        <p class="signalert" id="register-output"></p>
       </div>
+      <button class="log" type="submit">登入</button>
       <button class="create" type="submit">確定</button>
     </form>
   </div>

@@ -12,7 +12,7 @@ $(document).ready(function() {
             }
             else {
                 console.log(data);
-                $("#signin-output").html(`<p>${data}</p>`)
+                $("#signin-output").html(`${data}`)
             }
         })
     })
@@ -33,7 +33,7 @@ $(document).ready(function() {
             passwordagain: $('#register input[name="re_passwordagain"]').val()
         }, (data) => {
             // Assume success LOL
-            $("#register-output").html(`<p>${data}</p>`)
+            $("#register-output").html(`${data}`)
 
             // Go back to main page
             console.log(data);
