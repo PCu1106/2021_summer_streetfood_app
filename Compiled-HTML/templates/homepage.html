@@ -1,0 +1,33 @@
+<!DOCTYPE html><html><head><title>livefood</title><link href="../../static/sass/dist/homepage.css" rel="stylesheet" type="text/css"><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script><script src="../../static/js/homepage.js"></script><script src="../../static/js/app.js"></script><link href="../../static/manifest.json" rel="manifest" crossorigin="use-credentials"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"></head><body><div id="status-container"><img id="gps-signal" src="../../static/file/gps-n.png"></div><div class="container" id="home-container"><div id="title">Food cam</div><div id="btn-group"><div class="btns" id="camera-btn"><img id="icon" src="../../static/file/camera.png"></div><div class="btns" id="favorite-btn"><img id="icon" src="../../static/file/favorite.png"></div><div class="btns" id="history-btn"><img id="icon" src="../../static/file/history.png"></div></div></div><div class="container" id="camera-container"><img class="exit-btn" id="camera-exit" src="../../static/file/previous-icon-w.png"><video id="cam-window" autoplay></video><canvas id="cam-sensor"></canvas><div id="positioninfo"><p id="direction"></p><p id="position"></p></div><img id="cam-output" src="//:0" alt=""><div id="shoot-btn"></div><img id="shoot-again-btn" src="../../static/file/camera.png"><img id="goto-list-btn" src="../../static/file/list.png"><div class="list" id="restaurant-list"><p class="title" align="center">商家資訊</p></div><script>//- if(navigator.geolocation) {
+//-   navigator.geolocation.getCurrentPosition(function(position){
+//-     console.log(position);
+//-     console.log('geolocation is supported');
+//-   });}
+//- else{
+//-   console.log('geolocation is not supported');
+//- }
+</script></div><div class="container" id="favorite-container"><img class="exit-btn" id="favorite-exit" src="../../static/file/cross-icon.png"><img class="list-sw" id="history-sw" src="../../static/file/history.png"><div class="title" align="center">我的最愛</div><div class="list" id="favorite_list"><!-- {favorite0} -->
+<!-- {favorite1} -->
+<!-- {favorite2} -->
+<!-- {favorite3} -->
+<!-- {favorite4} -->
+<!-- {favorite5} -->
+<!-- {favorite6} -->
+<!-- {favorite7} -->
+<!-- {favorite8} -->
+<!-- {favorite9} -->
+<!-- {favorite10} -->
+<!-- {favorite11} -->
+<!-- {favorite12} -->  </div></div><div class="container" id="history-container"><img class="exit-btn" id="history-exit" src="../../static/file/cross-icon.png"><img class="list-sw" id="favorite-sw" src="../../static/file/favorite.png"><div class="title" align="center">歷史紀錄</div><div class="list" id="history_list"><!-- {shopname0} -->
+<!-- {shopname1} -->
+<!-- {shopname2} -->
+<!-- {shopname3} -->
+<!-- {shopname4} -->
+<!-- {shopname5} -->
+<!-- {shopname6} -->
+<!-- {shopname7} -->
+<!-- {shopname8} -->
+<!-- {shopname9} -->
+<!-- {shopname10} -->
+<!-- {shopname11} -->
+<!-- {shopname12} -->        </div></div></body></html>

@@ -161,7 +161,7 @@ function render(filename, callback) {
     callback(null, data);
   });
 };
-
+//save
 const bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 app.post('/save', urlencodedParser, (req, res) => {
@@ -173,6 +173,11 @@ app.post('/save', urlencodedParser, (req, res) => {
     db.close();
     res.send(req.body.id);
   }
+});
+//save(從restaurant-list按下"儲存"button後將店家名稱存進我的最愛)
+app.post('/saveToFav', urlencodedParser, (req, res) =>{
+  console.log('shop name: ' + req.body.name)
+  //交給db寫後面
 });
 
 //login

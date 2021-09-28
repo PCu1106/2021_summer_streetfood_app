@@ -174,6 +174,10 @@ $(document).ready(function(){
           for (var i=0; i<length; i++) {
             var obj = JSON.parse(result[i]); //一間店的所有資訊
             showList(obj,i);
+            $("#shop_save_"+i.toString()).click(function(){
+              //return obj name to server.js
+              saveListToFav(obj.name);
+            });
           }
         }
       },
@@ -252,6 +256,23 @@ function save(elem) {
       console.log('return: ' + data);
   })
 }
+//save(從restaurant-list按下"儲存"button後將店家名稱存進我的最愛)
+function saveListToFav(shop_name) {
+  console.log(shop_name);
+  var name = {name: shop_name};
+  $.ajax({
+    data : name,
+    url : '/saveToFav',
+    type : 'post',
+    dataType : 'json',
+    success : function(){
+      console.log('success')
+    },
+    error : function(jqXHR, textStatus, errorThrown){
+      alert(jqXHR.textStatus);
+    }
+  });
+}
 
 //get json length
 function getJsonLength(jsonData) {
@@ -323,14 +344,27 @@ function showList(object,num) {
   shop_time.textContent = object.time;
   shop_time.setAttribute('class','business-hours');
   shop_item.appendChild(shop_time);
-  //<div class="small-block">電話</div>
+  //<div class="control_btn"><div class="small-block">電話</div><div class="small-block">網站</div></div>
+  var control_btn = document.createElement('div')
+  control_btn.setAttribute('id','control_btn');
+  control_btn.setAttribute('class','control_btn');
+  shop_item.appendChild(control_btn);
+
   var phone = document.createElement('div');
   phone.textContent = "電話";
-  shop_item.appendChild(phone);
-  //<div class="small-block">網站</div>
+  phone.setAttribute('class','small-block');
+  control_btn.appendChild(phone);
+
   var web = document.createElement('div');
   web.textContent = "網站";
-  shop_item.appendChild(web);
+  web.setAttribute('class','small-block');
+  control_btn.appendChild(web);
+  //<button class="save-btn">儲存</button>
+  var shop_save = document.createElement('button');
+  shop_save.textContent = "儲存";
+  shop_save.setAttribute('class','save-btn');
+  shop_save.setAttribute('id','shop_save_'+num.toString());
+  control_btn.appendChild(shop_save);
 }
 
 //刪除子元素
@@ -340,4 +374,4 @@ function deleteChild(parent) {
       parent.removeChild(child); 
       child = parent.lastElementChild; 
   } 
-} 
+}
