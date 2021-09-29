@@ -131,8 +131,8 @@ function render(filename, callback) {
                 <p class="phone-number">電話:' + paramsnumber[key] + '</p>\
                 <p class="business-hours">營業時間:11:00-21:00</p>\
                 <div class="control_btn">\
-                  <div class="small-block">電話</div>\
-                  <div class="small-block">網站</div>\
+                  <a href="' + paramsnumber[key] + '">撥打電話</a>\
+                  <a href="' + paramsweb[key] + '">網站</a>\
                   <button onclick="save(this);" class="save-btn" value="' + paramsid[key] + '">儲存</button>\
                 </div>\
               </div>';
@@ -152,8 +152,8 @@ function render(filename, callback) {
                 <p class="phone-number">電話:' + paramsnumber[key] + '</p>\
                 <p class="business-hours">營業時間:11:00-21:00</p>\
                 <div class="control_btn">\
-                  <div class="small-block">電話</div>\
-                  <div class="small-block">網站</div>\
+                <a href="' + paramsnumber[key] + '">撥打電話</a>\
+                  <a href="' + paramsweb[key] + '">網站</a>\
                 </div>\
               </div>';
       data = data.replace('<!-- {favorite' + key  + '} -->', block);
