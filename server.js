@@ -84,7 +84,7 @@ function sql_fav() {
       }
     }
     x++;
-    console.log(row.name);
+    //console.log(row.name);
   });
   db.close();
   return param;
@@ -118,7 +118,7 @@ function render(filename, callback) {
     var params_fav = {};
     sql();
     params_fav = sql_fav();
-    await wait(500);
+    await wait(1000);
     for (var key in paramname) {
       block = '<div class="shop-item">\
                 <p class="shop-name" align="center">' + paramname[key] + '</p>\
@@ -139,7 +139,7 @@ function render(filename, callback) {
       data = data.replace('<!-- {shopname' + key  + '} -->', block);
     }
     for (var key_fav in params_fav) {
-      console.log('params_fav[' + key_fav  + ']' + params_fav[key_fav]);
+      //console.log('params_fav[' + key_fav  + ']' + params_fav[key_fav]);
       var key = params_fav[key_fav];
       block = '<div class="shop-item">\
                 <p class="shop-name" align="center">' + paramname[key] + '</p>\
@@ -210,10 +210,39 @@ app.post('/templates/dist/login', (req, res) => {
       res.send("帳號或密碼不能空白！");
   }
 });
- 
-// list
-app.post('/list', (req, res) =>{
 
+async function sendlistdata(final_list) {
+  var db = new sqlite3.Database(file);
+  var time = "營業時間:11:00-21:00";
+  var result = []; //陣列，每一格儲存一間店的所有資訊
+  for (var i=0; i < final_list.length; i++) {
+    var sqlselect = "SELECT * FROM shop WHERE name = '" + final_list[i] + "';";
+    db.get(sqlselect, function(err, row) {
+      if(row) {
+        var obj = JSON.stringify ({
+          name: final_list[i],
+          score: row.rating,
+          command: row.comment,
+          phone: row.number,
+          time: time,
+          website: row.web
+        })
+        result.push(obj);
+        console.log(row);
+        console.log('obj');
+        console.log(obj);
+      }      
+    });      
+  }    
+  db.close();
+  await wait(500);
+  console.log('result');
+  console.log(result);
+  return result;
+}
+
+// list
+app.post('/list', async(req, res) =>{
   let pyshell = new PythonShell('./pythonfunc/dectect_picture.py');
   // send base64 string to python stdin
   console.log('send data to python shell');
@@ -234,7 +263,7 @@ app.post('/list', (req, res) =>{
     const final_list = tmp.substring(1,tmp.length-1).replace(/\"/g,'').split(',');
     console.log(final_list);
     //寫死的店家資訊，等db整理完再改
-    var score = "4.4";
+    /*var score = "4.4";
     var command = "1825則評論";
     var phone = "06-2757575";
     var time = "營業時間:11:00-21:00";
@@ -243,19 +272,21 @@ app.post('/list', (req, res) =>{
     for (var i=0; i < final_list.length; i++) {
       var obj = JSON.stringify ({
         name: final_list[i],
-        score: score,
-        command: command,
-        phone: phone,
+        score: row.rating,
+        command: row.comment,
+        phone: row.number,
         time: time,
-        website: website
+        website: row.web
       })
       result.push(obj);
-    }
+    } */   
+    var result = [];
+    result = sendlistdata(final_list);
     // 最後打包成json型態回傳
     console.log(result);
     res.json(result);
-  });
-  
+  });  
+  await wait(500);
   // end the input stream and allow the process to exit
   pyshell.end(function (err,code,signal) {
     if (err) throw err;
