@@ -152,7 +152,7 @@ function render(filename, callback) {
                 <p class="phone-number">電話:' + paramsnumber[key] + '</p>\
                 <p class="business-hours">營業時間:11:00-21:00</p>\
                 <div class="control_btn">\
-                <a href="tel:' + paramsnumber[key] + '">撥打電話</a>\
+                  <a href="tel:' + paramsnumber[key] + '">撥打電話</a>\
                   <a href="' + paramsweb[key] + '">網站</a>\
                 </div>\
               </div>';
@@ -211,7 +211,7 @@ app.post('/templates/dist/login', (req, res) => {
   }
 });
 
-async function sendlistdata(final_list) {
+async function put_into_history(final_list) {
   var db = new sqlite3.Database(file);
   var time = "營業時間:11:00-21:00";
   var result = []; //陣列，每一格儲存一間店的所有資訊
@@ -219,8 +219,11 @@ async function sendlistdata(final_list) {
     var sqlselect = "SELECT * FROM shop WHERE name = '" + final_list[i] + "';";
     db.get(sqlselect, function(err, row) {
       if(row) {
+        var sql = "INSERT INTO history_" + userid + " (shopID, favorite) VALUES (" + row.ID + ",0);";
+        db.run(sql);
         var obj = JSON.stringify ({
-          name: final_list[i],
+          id: row.ID,
+          name: row.name,
           score: row.rating,
           command: row.comment,
           phone: row.number,
@@ -228,27 +231,24 @@ async function sendlistdata(final_list) {
           website: row.web
         })
         result.push(obj);
-        console.log(row);
+        /*console.log(row);
         console.log('obj');
-        console.log(obj);
-      }      
+        console.log(obj);*/
+      }     
     });      
   }    
   db.close();
-  await wait(500);
-  console.log('result');
-  console.log(result);
   return result;
 }
 
 // list
-app.post('/list', async(req, res) =>{
+app.post('/list', async (req, res) =>{
   let pyshell = new PythonShell('./pythonfunc/dectect_picture.py');
   // send base64 string to python stdin
   console.log('send data to python shell');
   pyshell.send(req.body.img_64);
   // received a message from Python script (ex:print (xxx) )
-  pyshell.on('message', function (message) {
+  pyshell.on('message', async function (message) {
     console.log('received store name list');
     console.log(`type is : ${typeof message}`);
     console.log(message);
@@ -262,32 +262,17 @@ app.post('/list', async(req, res) =>{
     //  => array ['飽芝林關東煮', '個別指導明光義塾 台南後甲教室'] 
     const final_list = tmp.substring(1,tmp.length-1).replace(/\"/g,'').split(',');
     console.log(final_list);
-    //寫死的店家資訊，等db整理完再改
-    /*var score = "4.4";
-    var command = "1825則評論";
-    var phone = "06-2757575";
-    var time = "營業時間:11:00-21:00";
-    var website = "https://foodcam.tk";
-    var result = []; //陣列，每一格儲存一間店的所有資訊
-    for (var i=0; i < final_list.length; i++) {
-      var obj = JSON.stringify ({
-        name: final_list[i],
-        score: row.rating,
-        command: row.comment,
-        phone: row.number,
-        time: time,
-        website: row.web
-      })
-      result.push(obj);
-    } */   
     var result = [];
-    result = sendlistdata(final_list);
+    result = await put_into_history(final_list);
     // 最後打包成json型態回傳
+    await wait(1000);
+    console.log('result');
     console.log(result);
     res.json(result);
+    console.log('json finish');
   });  
-  await wait(500);
   // end the input stream and allow the process to exit
+  await wait(1000);
   pyshell.end(function (err,code,signal) {
     if (err) throw err;
     console.log('The exit code was: ' + code);
@@ -295,6 +280,8 @@ app.post('/list', async(req, res) =>{
     console.log('finished');
   });
 });
+
+
 
 //------------------------------------------------------------------------------
 

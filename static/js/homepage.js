@@ -176,7 +176,8 @@ $(document).ready(function(){
             showList(obj,i);
             $("#shop_save_"+i.toString()).click(function(){
               //return obj name to server.js
-              saveListToFav(obj.name);
+              console.log(obj);
+              saveListToFav(obj.id);
             });
           }
         }
@@ -257,21 +258,13 @@ function save(elem) {
   })
 }
 //save(從restaurant-list按下"儲存"button後將店家名稱存進我的最愛)
-function saveListToFav(shop_name) {
-  console.log(shop_name);
-  var name = {name: shop_name};
-  $.ajax({
-    data : name,
-    url : '/saveToFav',
-    type : 'post',
-    dataType : 'json',
-    success : function(){
-      console.log('success')
-    },
-    error : function(jqXHR, textStatus, errorThrown){
-      alert(jqXHR.textStatus);
-    }
-  });
+function saveListToFav(id_fav) {
+  console.log(id_fav);
+  $.post('/save', {
+    id: id_fav
+  }, (data) => {
+      console.log('return: ' + data);
+  })
 }
 
 //get json length
