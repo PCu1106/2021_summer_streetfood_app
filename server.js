@@ -131,7 +131,7 @@ function render(filename, callback) {
                 <p class="phone-number">電話:' + paramsnumber[key] + '</p>\
                 <p class="business-hours">營業時間:11:00-21:00</p>\
                 <div class="control_btn">\
-                  <a href="' + paramsnumber[key] + '">撥打電話</a>\
+                  <a href="tel:' + paramsnumber[key] + '">撥打電話</a>\
                   <a href="' + paramsweb[key] + '">網站</a>\
                   <button onclick="save(this);" class="save-btn" value="' + paramsid[key] + '">儲存</button>\
                 </div>\
@@ -152,7 +152,7 @@ function render(filename, callback) {
                 <p class="phone-number">電話:' + paramsnumber[key] + '</p>\
                 <p class="business-hours">營業時間:11:00-21:00</p>\
                 <div class="control_btn">\
-                <a href="' + paramsnumber[key] + '">撥打電話</a>\
+                <a href="tel:' + paramsnumber[key] + '">撥打電話</a>\
                   <a href="' + paramsweb[key] + '">網站</a>\
                 </div>\
               </div>';
