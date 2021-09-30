@@ -320,16 +320,22 @@ function showList(object,num) {
   shop_ratings.appendChild(empty_star);
   var full_start = document.createElement('div');
   full_start.textContent = "★★★★★";
-  full_start.setAttribute('class','full_star')
+  //full_start.setAttribute('class','full_star')
+  if(object.score == 'X'){
+    full_start.setAttribute('style',"width:0%;position: absolute;left: 0;top: 0;white-space: nowrap;overflow: hidden;color: #D56A16;")
+  }
+  else{
+    full_start.setAttribute('style',"width:" +  parseFloat(object.score) * 20.0 + "%;position: absolute;left: 0;top: 0;white-space: nowrap;overflow: hidden;color: #D56A16;")
+  }
   shop_ratings.appendChild(full_start);
   //<p class="command">1825則評論</p>
   var shop_command = document.createElement('p');
-  shop_command.textContent = object.command;
+  shop_command.textContent = object.command + "則評論";
   shop_command.setAttribute('class','command');
   shop_item.appendChild(shop_command);
   //<p class="phone-number">電話:06-2365768</p>
   var shop_phone = document.createElement('p');
-  shop_phone.textContent = object.phone;
+  shop_phone.textContent = "電話:" + object.phone;
   shop_phone.setAttribute('class','phone-number');
   shop_item.appendChild(shop_phone);
   //<p class="business-hours">營業時間:11:00-21:00</p>
@@ -343,15 +349,18 @@ function showList(object,num) {
   control_btn.setAttribute('class','control_btn');
   shop_item.appendChild(control_btn);
 
-  var phone = document.createElement('div');
-  phone.textContent = "電話";
-  phone.setAttribute('class','small-block');
-  control_btn.appendChild(phone);
+  var phone = document.createElement('a');
+  phone.textContent = "撥打電話";
+  phone.setAttribute('href','small-block');
+  phone.href = "tel:" + object.phone;
+  shop_item.appendChild(phone);
 
-  var web = document.createElement('div');
+  var web = document.createElement('a');
   web.textContent = "網站";
-  web.setAttribute('class','small-block');
-  control_btn.appendChild(web);
+  web.setAttribute('href','small-block');
+  web.href = object.website;
+  shop_item.appendChild(web);
+  
   //<button class="save-btn">儲存</button>
   var shop_save = document.createElement('button');
   shop_save.textContent = "儲存";

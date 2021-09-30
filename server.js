@@ -125,7 +125,7 @@ function render(filename, callback) {
                 <p class="score">' + paramsrating[key] + '</p>\
                 <div class="ratings">\
                 <div class="empty_star">★★★★★</div>\
-                <div class="full_star">★★★★★</div>\
+                <div style="width: ' + paramsrating[key] * 20 + '%;position: absolute;left: 0;top: 0;white-space: nowrap;overflow: hidden;color: #D56A16;">★★★★★</div>\
                 </div>\
                 <p class="command">' + paramscomment[key] + '則評論</p>\
                 <p class="phone-number">電話:' + paramsnumber[key] + '</p>\
@@ -146,7 +146,7 @@ function render(filename, callback) {
                 <p class="score">' + paramsrating[key] + '</p>\
                 <div class="ratings">\
                 <div class="empty_star">★★★★★</div>\
-                <div class="full_star">★★★★★</div>\
+                <div style="width: ' + paramsrating[key] * 20 + '%;position: absolute;left: 0;top: 0;white-space: nowrap;overflow: hidden;color: #D56A16;">★★★★★</div>\
                 </div>\
                 <p class="command">' + paramscomment[key] + '</p>\
                 <p class="phone-number">電話:' + paramsnumber[key] + '</p>\
@@ -231,9 +231,6 @@ async function put_into_history(final_list) {
           website: row.web
         })
         result.push(obj);
-        /*console.log(row);
-        console.log('obj');
-        console.log(obj);*/
       }     
     });      
   }    
