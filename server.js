@@ -77,8 +77,8 @@ function sql_fav() {
   var x = 1;
   var param = {};
   db.each(sqlselect, function(err, row) {
-    for (var key in paramname) {
-      if(paramname[key] == row.name) {
+    for (var key in paramsid) {
+      if(paramsid[key] == row.ID) {
         param[x] = key;
         break;
       }
@@ -139,8 +139,8 @@ function render(filename, callback) {
       data = data.replace('<!-- {shopname' + key  + '} -->', block);
     }
     for (var key_fav in params_fav) {
-      //console.log('params_fav[' + key_fav  + ']' + params_fav[key_fav]);
       var key = params_fav[key_fav];
+      console.log(key + " : " + paramname[key]);
       block = '<div class="shop-item">\
                 <p class="shop-name" align="center">' + paramname[key] + '</p>\
                 <p class="score">' + paramsrating[key] + '</p>\
@@ -148,7 +148,7 @@ function render(filename, callback) {
                 <div class="empty_star">★★★★★</div>\
                 <div style="width: ' + paramsrating[key] * 20 + '%;position: absolute;left: 0;top: 0;white-space: nowrap;overflow: hidden;color: #D56A16;">★★★★★</div>\
                 </div>\
-                <p class="command">' + paramscomment[key] + '</p>\
+                <p class="command">' + paramscomment[key] + '則評論</p>\
                 <p class="phone-number">電話:' + paramsnumber[key] + '</p>\
                 <p class="business-hours">營業時間:11:00-21:00</p>\
                 <div class="control_btn">\
@@ -157,7 +157,10 @@ function render(filename, callback) {
                 </div>\
               </div>';
       data = data.replace('<!-- {favorite' + key  + '} -->', block);
+      console.log(block);
+      console.log('\n');
     }
+    //console.log(data);
     callback(null, data);
   });
 };
