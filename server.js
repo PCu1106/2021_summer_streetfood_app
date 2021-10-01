@@ -42,6 +42,7 @@ app.get('/python', function(req, res){
 app.get('/', function (req, res) {
   console.log(`${__dirname+'/static'}`);
   //res.sendFile(path.join(__dirname + '/templates/dist/index.html'));
+  console.log(paramsname);
   render(path.join(__dirname + '/templates/dist/homepage.html'),  function (err, data) {
     res.send(data);
   });
@@ -63,8 +64,8 @@ app.listen(port, "127.0.0.1", () => {
 // });
 //-------------------------------------------------------------------------------
 var sqlite3 = require('sqlite3').verbose()
-var userid = "01";
-var paramname = {};
+var userid = "50";
+var paramsname = {};
 var paramsid = {};
 var paramsrating = {};
 var paramscomment = {};
@@ -94,10 +95,12 @@ function sql() {
   var db = new sqlite3.Database(file);
   var sqlselect = "SELECT * FROM shop as a INNER JOIN history_" + userid + " as b ON a.ID = b.shopID;";
   var x = 1;
+  console.log(sqlselect);
   console.log(userid);
+  console.log(paramsname);
   db.each(sqlselect, function(err, row) {
-    //console.log(row.ID + ": " + row.NAME);
-    paramname[x] = row.name.toString();
+    console.log(row.ID + ": " + row.name);
+    paramsname[x] = row.name.toString();
     paramsid[x] = row.ID;
     paramsrating[x] = row.rating;
     paramscomment[x] = row.comment;
@@ -105,6 +108,7 @@ function sql() {
     paramsweb[x] = row.web;
     x++;
   });
+  console.log(paramsname);
   db.close();
 }
 
@@ -119,9 +123,10 @@ function render(filename, callback) {
     sql();
     params_fav = sql_fav();
     await wait(1000);
-    for (var key in paramname) {
+    for (var key in paramsname) {
+      console.log(key + " : " + paramsname[key]);
       block = '<div class="shop-item">\
-                <p class="shop-name" align="center">' + paramname[key] + '</p>\
+                <p class="shop-name" align="center">' + paramsname[key] + '</p>\
                 <p class="score">' + paramsrating[key] + '</p>\
                 <div class="ratings">\
                 <div class="empty_star">★★★★★</div>\
@@ -140,9 +145,9 @@ function render(filename, callback) {
     }
     for (var key_fav in params_fav) {
       var key = params_fav[key_fav];
-      //console.log(key + " : " + paramname[key]);
+      //console.log(key + " : " + paramsname[key]);
       block = '<div class="shop-item">\
-                <p class="shop-name" align="center">' + paramname[key] + '</p>\
+                <p class="shop-name" align="center">' + paramsname[key] + '</p>\
                 <p class="score">' + paramsrating[key] + '</p>\
                 <div class="ratings">\
                 <div class="empty_star">★★★★★</div>\
