@@ -140,7 +140,7 @@ function render(filename, callback) {
     }
     for (var key_fav in params_fav) {
       var key = params_fav[key_fav];
-      console.log(key + " : " + paramname[key]);
+      //console.log(key + " : " + paramname[key]);
       block = '<div class="shop-item">\
                 <p class="shop-name" align="center">' + paramname[key] + '</p>\
                 <p class="score">' + paramsrating[key] + '</p>\
@@ -157,8 +157,8 @@ function render(filename, callback) {
                 </div>\
               </div>';
       data = data.replace('<!-- {favorite' + key  + '} -->', block);
-      console.log(block);
-      console.log('\n');
+      //console.log(block);
+      //console.log('\n');
     }
     //console.log(data);
     callback(null, data);
