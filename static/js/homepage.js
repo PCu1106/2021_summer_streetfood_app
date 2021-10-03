@@ -152,12 +152,12 @@ $(document).ready(function(){
     //create "商家資訊" title
     shopinfo_title();
     $("#restaurant-list").show();
-    var img = { img_64 : document.getElementById("cam-output").getAttribute("src")};
+    //var img = { img_64 : document.getElementById("cam-output").getAttribute("src")};
+    var img = { img_64 : document.getElementById("cam-output").getAttribute("src"), lat : latitude_return, long : longitude_return};
     // send base64 to server
     //console.log('list');
     $.ajax({
       data : img,
-      //data : { 'img': img, 'latitude': latitude_return, 'longitude': longitude_return },
       url : '/list',
       type : 'post',
       dataType : 'json',

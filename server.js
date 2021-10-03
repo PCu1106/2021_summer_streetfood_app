@@ -254,6 +254,8 @@ app.post('/list', async (req, res) =>{
   // send base64 string to python stdin
   console.log('send data to python shell');
   pyshell.send(req.body.img_64);
+  pyshell.send(req.body.lat);
+  pyshell.send(req.body.long);
   // received a message from Python script (ex:print (xxx) )
   pyshell.on('message', async function (message) {
     console.log('received store name list');

@@ -194,8 +194,11 @@ def FLANN_Matching(img_base64, tr_name_list ,tr_desc_list):
     
 def main():
   img_base64 = input()
+  lat = input()
+  long = input()
   #img_base64 = encode_64("pic.JPG")
-  name_list, feature_list = search(10,10,10)
+  #name_list, feature_list = search(10,10,10)
+  name_list, feature_list = search(lat,long,10)
   b=FLANN_Matching(img_base64.split(',')[1], name_list, feature_list)
   #b=FLANN_Matching(img_base64, name_list, feature_list)
   result = json.dumps(b)
