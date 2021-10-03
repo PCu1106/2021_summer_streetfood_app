@@ -353,13 +353,13 @@ function showList(object,num) {
   phone.textContent = "撥打電話";
   phone.setAttribute('href','small-block');
   phone.href = "tel:" + object.phone;
-  shop_item.appendChild(phone);
+  control_btn.appendChild(phone);
 
   var web = document.createElement('a');
   web.textContent = "網站";
   web.setAttribute('href','small-block');
   web.href = object.website;
-  shop_item.appendChild(web);
+  control_btn.appendChild(web);
   
   //<button class="save-btn">儲存</button>
   var shop_save = document.createElement('button');
