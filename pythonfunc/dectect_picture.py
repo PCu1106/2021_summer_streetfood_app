@@ -34,7 +34,7 @@ def search(longitude,latitude,direction):#接收使用者經緯度跟方向，�
     path = os.path.join(path, "..", "..", "test.db")
     conn = sqlite3.connect(path)
     c = conn.cursor()
-    c.execute('SELECT `feature`,`NAME` FROM `table3`;')
+    c.execute('SELECT `FEATURE`,`NAME` FROM `table3`;')
     name=[]
     feature=[]
     for row in c.fetchall():
