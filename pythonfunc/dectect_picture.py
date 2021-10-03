@@ -154,7 +154,6 @@ def FLANN_Matching(img_base64, tr_name_list ,tr_desc_list):
       length=(len(max_tmp_index_list))       
       # 至少回傳一個結果
       max_tmp_correct_index.append(max_tmp_index_list[length-1])
-      #max_tmp_correct_index.append(max_tmp_index_list[length-2]) 
 
         
       for i in range(len(max_tmp_list)-1):

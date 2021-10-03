@@ -95,9 +95,9 @@ function sql() {
   var db = new sqlite3.Database(file);
   var sqlselect = "SELECT * FROM shop_tmp as a INNER JOIN history_" + userid + " as b ON a.ID = b.shopID;";
   var x = 1;
-  console.log(sqlselect);
-  console.log(userid);
-  console.log(paramsname);
+  //console.log(sqlselect);
+  //console.log(userid);
+  //console.log(paramsname);
   db.each(sqlselect, function(err, row) {
     console.log(row.ID + ": " + row.name);
     paramsname[x] = row.name.toString();
@@ -108,7 +108,7 @@ function sql() {
     paramsweb[x] = row.web;
     x++;
   });
-  console.log(paramsname);
+  //console.log(paramsname);
   db.close();
 }
 
@@ -124,7 +124,7 @@ function render(filename, callback) {
     params_fav = sql_fav();
     await wait(1000);
     for (var key in paramsname) {
-      console.log(key + " : " + paramsname[key]);
+      //console.log(key + " : " + paramsname[key]);
       block = '<div class="shop-item">\
                 <p class="shop-name" align="center">' + paramsname[key] + '</p>\
                 <p class="score">' + paramsrating[key] + '</p>\
@@ -171,6 +171,8 @@ function render(filename, callback) {
 };
 //save
 const bodyParser = require('body-parser');
+const { resolve } = require('path');
+const { rejects } = require('assert');
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 app.post('/save', urlencodedParser, (req, res) => {
   if (req.body.id != ""){
@@ -239,8 +241,8 @@ async function put_into_history(final_list) {
           website: row.web
         })
         result.push(obj);
-      }     
-    });      
+      }    
+    });
   }    
   db.close();
   return result;
@@ -265,19 +267,18 @@ app.post('/list', async (req, res) =>{
     // 針對decode完的結果做刪減並型態轉換
     // ex: string [ '"飽芝林關東煮"', '"個別指導明光義塾 台南後甲教室"' ]
     //  => array ['飽芝林關東煮', '個別指導明光義塾 台南後甲教室'] 
-    const final_list = tmp.substring(1,tmp.length-1).replace(/\"/g,'').split(',');
+    const final_list = tmp.substring(1,tmp.length-1).replace(/\"/g,'').split(', ');
     console.log(final_list);
     var result = [];
     result = await put_into_history(final_list);
     // 最後打包成json型態回傳
-    await wait(1000);
+    await wait(10);
     console.log('result');
     console.log(result);
     res.json(result);
     console.log('json finish');
   });  
   // end the input stream and allow the process to exit
-  await wait(1000);
   pyshell.end(function (err,code,signal) {
     if (err) throw err;
     console.log('The exit code was: ' + code);
