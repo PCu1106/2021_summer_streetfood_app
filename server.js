@@ -74,7 +74,7 @@ var paramsweb = {};
 
 function sql_fav() {
   var db = new sqlite3.Database(file);
-  var sqlselect = "SELECT * FROM shop as a INNER JOIN history_" + userid + " as b ON a.ID = b.shopID AND b.favorite == 1;";
+  var sqlselect = "SELECT * FROM shop_tmp as a INNER JOIN history_" + userid + " as b ON a.ID = b.shopID AND b.favorite == 1;";
   var x = 1;
   var param = {};
   db.each(sqlselect, function(err, row) {
@@ -93,7 +93,7 @@ function sql_fav() {
 
 function sql() {
   var db = new sqlite3.Database(file);
-  var sqlselect = "SELECT * FROM shop as a INNER JOIN history_" + userid + " as b ON a.ID = b.shopID;";
+  var sqlselect = "SELECT * FROM shop_tmp as a INNER JOIN history_" + userid + " as b ON a.ID = b.shopID;";
   var x = 1;
   console.log(sqlselect);
   console.log(userid);
@@ -224,7 +224,7 @@ async function put_into_history(final_list) {
   var time = "營業時間:11:00-21:00";
   var result = []; //陣列，每一格儲存一間店的所有資訊
   for (var i=0; i < final_list.length; i++) {
-    var sqlselect = "SELECT * FROM shop WHERE name = '" + final_list[i] + "';";
+    var sqlselect = "SELECT * FROM shop_tmp WHERE name = '" + final_list[i] + "';";
     db.get(sqlselect, function(err, row) {
       if(row) {
         var sql = "INSERT INTO history_" + userid + " (shopID, favorite) VALUES (" + row.ID + ",0);";
