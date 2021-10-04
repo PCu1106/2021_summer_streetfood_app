@@ -151,6 +151,7 @@ $(document).ready(function(){
     deleteChild(restaurant_list);
     //create "商家資訊" title
     shopinfo_title();
+    $("#status").innerHTML = "Loading..."
     $("#restaurant-list").show();
     //var img = { img_64 : document.getElementById("cam-output").getAttribute("src")};
     var img = { img_64 : document.getElementById("cam-output").getAttribute("src"), lat : latitude_return, long : longitude_return};
@@ -165,12 +166,15 @@ $(document).ready(function(){
         // if received data correctly
         // result : [ ]
         console.log(result)
+        
         var length = getJsonLength(result);
         console.log('length: '+length)
         if (length == 0) {
           console.log('查無商家資訊')
+          $("#status").innerHTML = "查無商家資訊";
         }
         else {
+          $("#status").hide();
           for (var i=0; i<length; i++) {
             var obj = JSON.parse(result[i]); //一間店的所有資訊
             showList(obj,i);
@@ -278,7 +282,7 @@ function getJsonLength(jsonData) {
 
 //create "商家資訊" title
 function shopinfo_title(){
-  //<h1 class="title" align="center"><b>商家資訊</b></h1>
+  //<h1 class="title" align="center"><b>商家資訊</b><b>Loading...</b></h1>
   var title = document.createElement('h1');
   title.setAttribute('class','title');
   title.setAttribute('id','shopinfo');
@@ -287,6 +291,13 @@ function shopinfo_title(){
   var txt = document.createElement('b');
   txt.textContent = "商家資訊";
   document.querySelector("#shopinfo").appendChild(txt);
+
+  var status = document.createElement('h1');
+  status.textContent = "Loading..."
+  status.setAttribute('id','status');
+  status.setAttribute('class','title');
+  status.setAttribute('align','center');
+  document.querySelector("#restaurant-list").appendChild(status);
 }
 
 //dynamic show shop-list in homepage.html
