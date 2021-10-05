@@ -218,7 +218,7 @@ function geo_success(position) {
     longitude_return = position.coords.longitude; //this variable store for returning to server.js by ajax
     latitude = Number((position.coords.latitude).toFixed(6)).toString();
     longitude = Number((position.coords.longitude).toFixed(6)).toString();
-    $('#position').html('定位' + latitude + ', ' + longitude)
+    // $('#position').html('定位' + latitude + ', ' + longitude)
     nonew = 0
   }
   else{
@@ -227,7 +227,7 @@ function geo_success(position) {
     nonew += 1
     if (nonew > 5){
       $('#gps-signal').attr('src', '../../static/file/gps-weak.png')
-      $('#position').html('confirming')
+      // $('#position').html('confirming')
     }
   }
 };
@@ -242,10 +242,7 @@ function geo_error(error) {
 if(window.DeviceOrientationEvent) {
   window.addEventListener('deviceorientation', 
     function(event) {
-      // var a = document.getElementById('alpha');
-      // alpha = event.alpha;
-      // a.innerHTML = Math.round(alpha);
-      $('#direction').html('方向' + Math.round(event.alpha))
+      // $('#direction').html('方向' + Math.round(event.alpha))
     }, 
   false);
 }else{
