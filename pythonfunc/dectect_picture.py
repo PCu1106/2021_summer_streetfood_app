@@ -34,7 +34,7 @@ def search(longitude,latitude,direction):#接收使用者經緯度跟方向，�
     path = os.path.join(path, "..", "..", "test.db")
     conn = sqlite3.connect(path)
     c = conn.cursor()
-    c.execute('SELECT `FEATURE`,`NAME` FROM `table3` WHERE abs(`LATITUDE`-{latitude})>0.0002 AND abs(`LONGITUDE`-{longitude})>0.0002;')
+    c.execute(f"SELECT `FEATURE`,`NAME` FROM `table3` WHERE abs(`LATITUDE`-{latitude})>0.0002 AND abs(`LONGITUDE`-{longitude})>0.0002;")
     name=[]
     feature=[]
     for row in c.fetchall():
