@@ -38,11 +38,8 @@ In terms of architecture, we use pug, sass, JavaScript to write the front-end in
 
 ## UI
 
-<img src=./demo/5.png width=80% />
-<img src=./demo/6.png width=80% />
-<img src=./demo/7.png width=80% />
-<img src=./demo/8.png width=80% />
-<img src=./demo/9.png width=80% />
-<img src=./demo/10.png width=80% />
-<img src=./demo/11.png width=80% />
-<img src=./demo/12.png width=80% />
+<img src=./demo/5.png width=15% /><img src=./demo/6.png width=15% /><img src=./demo/7.png width=15% />
+
+<img src=./demo/8.png width=15% /><img src=./demo/9.png width=15% /><img src=./demo/10.png width=15% />
+
+<img src=./demo/11.png width=15% /><img src=./demo/12.png width=15% />
